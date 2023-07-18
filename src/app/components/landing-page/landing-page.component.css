@@ -1,0 +1,168 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.right {
+  margin: 5em;
+}
+
+.right-icon {
+  height: 50px;
+}
+
+.right-title {
+  font-family: "chirp bold";
+  font-size: 70px;
+}
+
+.right-subtitle {
+  font-family: "chirp bold";
+  font-size: 40px;
+}
+
+.right-btns{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 58%;
+}
+
+.right-btns-google-btn {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "chirp bold";
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.right-btns-google-btn span {
+  margin-right: 41px;
+  display: block;
+  width: 29px;
+  height: 29px;
+  background-image: url("/assets/img/google-icon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(0deg);
+}
+.right-btns-google-btn:hover {
+  background-color: #828282;
+}
+
+.right-btns-google-btn:active {
+  transform: scale(0.95);
+}
+
+.right-btns-apple-btn {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "chirp bold";
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.right-btns-apple-btn span {
+  margin-right: 41px;
+  display: block;
+  width: 29px;
+  height: 29px;
+  background-image: url("/assets/img/apple-icon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(0deg);
+}
+
+.right-btns-apple-btn:hover {
+  background-color: #828282;
+}
+
+.right-btns-apple-btn:active {
+  transform: scale(0.95);
+}
+
+.right-divider{
+   width: 58%;
+   text-align: center;
+   border-bottom: 1px solid #ffffff;
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+   margin-top: 20px;
+}
+
+.right-divider span{
+  background:#000000;
+  padding:0 10px;
+}
+
+.right-create-acc-btn{
+  width: 58%;
+  color: #ffffff;
+  font-family: "chirp bold";
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.right-create-acc-btn:hover {
+  background-color: #1984cb;
+}
+
+.right-create-acc-btn:active {
+  transform: scale(0.95);
+}
+
+.right-has-acc-txt{
+  margin-top: 4em;
+}
+
+.right-has-acc-btn{
+  width: 58%;
+  color: #1d9bf0;
+  background-color: #000000;
+  font-family: "chirp bold";
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 1px solid #1d9bf0;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.right-has-acc-btn:hover {
+  background-color: #232424;
+}
+
+.right-has-acc-btn:active {
+  transform: scale(0.95);
+}

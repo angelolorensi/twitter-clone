@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'chirp bold';
+  src: url('assets/fonts/chirp-bold-web.ttf');
+}
+
+@font-face {
+  font-family: 'chirp regular';
+  src: url('assets/fonts/chirp-regular-web.ttf');
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+  font-family: 'chirp regular', 'chirp bold';
+  color: white;
+}
+
+.bg-blue{
+  background-color: #1d9bf0;
+}
+
+.color-blue{
+  color: #1d9bf0;
+}
+
+.bg-red{
+  background-color: red;
+}
+
+.color-red{
+  color: red;
+}
+
+.bg-gray{
+  background-color: #536471;
+}
+
+.color-gray{
+  color: #536471;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
