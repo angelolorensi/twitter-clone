@@ -1,0 +1,84 @@
+<div class="header">
+  <button class="close-btn" (click)="onStepBtnClicked()"><mat-icon  color="accent">{{stepIcon}}</mat-icon></button>
+  <div class="step-counter">Etapa {{stepCounter}} de 5</div>
+</div>
+<div class="container" *ngIf="page1">
+  <h1 class="title">Criar sua conta</h1>
+  <form class="form-fields" [formGroup]="form">
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name"/>
+    </mat-form-field>
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email"/>
+    </mat-form-field>
+
+    <h1 class="birthdate-title">Data de nascimento:</h1>
+    <div class="date-selectors">
+      <mat-form-field class="select-date">
+        <mat-label>Dia</mat-label>
+        <mat-select matNativeControl formControlName="dia">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+          <mat-option value="6">6</mat-option>
+          <mat-option value="7">7</mat-option>
+          <mat-option value="8">8</mat-option>
+          <mat-option value="9">9</mat-option>
+          <mat-option value="10">10</mat-option>
+          <mat-option value="11">11</mat-option>
+          <mat-option value="12">12</mat-option>
+          <mat-option value="13">13</mat-option>
+          <mat-option value="14">14</mat-option>
+          <mat-option value="15">15</mat-option>
+          <mat-option value="16">16</mat-option>
+          <mat-option value="17">17</mat-option>
+          <mat-option value="18">18</mat-option>
+          <mat-option value="19">19</mat-option>
+          <mat-option value="20">20</mat-option>
+          <mat-option value="21">21</mat-option>
+          <mat-option value="22">22</mat-option>
+          <mat-option value="23">23</mat-option>
+          <mat-option value="24">24</mat-option>
+          <mat-option value="25">25</mat-option>
+          <mat-option value="26">26</mat-option>
+          <mat-option value="27">27</mat-option>
+          <mat-option value="28">28</mat-option>
+          <mat-option value="29">29</mat-option>
+          <mat-option value="30">30</mat-option>
+          <mat-option value="31">31</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="select-date">
+        <mat-label>Mês</mat-label>
+        <mat-select matNativeControl formControlName="mes">
+          <mat-option value="Janeiro">Janeiro</mat-option>
+          <mat-option value="Fevereiro">Fevereiro</mat-option>
+          <mat-option value="Março">Março</mat-option>
+          <mat-option value="Abril" >Abril</mat-option>
+          <mat-option value="Maio">Maio</mat-option>
+          <mat-option value="Junho">Junho</mat-option>
+          <mat-option value="Julho">Julho</mat-option>
+          <mat-option value="Agosto">Agosto</mat-option>
+          <mat-option value="Setembro">Setembro</mat-option>
+          <mat-option value="Outubro">Outubro</mat-option>
+          <mat-option value="Novembro">Novembro</mat-option>
+          <mat-option value="Dezembro">Dezembro</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="select-date">
+        <mat-label>Ano</mat-label>
+        <mat-select formControlName="ano">
+            <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button class="next-btn bg-blue" (click)="onNextBtnClicked()">Avançar</button>
+  </form>
+</div>
+<div class="container2" *ngIf="page2">
+  pagina 2
+</div>

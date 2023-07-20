@@ -1,3 +1,4 @@
+<button class="close-btn"><mat-icon  color="accent" matDialogClose>close</mat-icon></button>
 <div mat-dialog-content class="container">
   <img class="logo" src="assets/img/twitter-logo.png" />
   <h1 class="title">Entrar no Twitter</h1>
@@ -10,7 +11,8 @@
   <p class="divider"><span>ou</span></p>
   <form>
     <mat-form-field class="login-input-form-field" color="primary" appearance="outline">
-      <input class="login-input" placeholder="Celular, e-mail ou nome de usuário" matInput/>
+      <mat-label>Celular, e-mail ou nome de usuário</mat-label>
+      <input matInput/>
     </mat-form-field>
     <button class="login-btn" type="submit">Avançar</button>
   </form>

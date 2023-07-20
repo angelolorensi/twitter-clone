@@ -11,6 +11,10 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateAccDialogComponent } from './components/create-acc-dialog/create-acc-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     LandingPageComponent,
     HomeComponent,
     LoginDialogComponent,
+    CreateAccDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +32,10 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

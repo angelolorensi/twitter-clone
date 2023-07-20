@@ -1,0 +1,101 @@
+.header{
+  display: flex;
+}
+
+.step-counter{
+  color: white;
+  font-size: 30px;
+  margin-left: 1em;
+  font-family: "chirp bold";
+}
+
+.container{
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+  border-radius: 30px;
+}
+
+.title{
+  color: white;
+  font-family: "chirp bold";
+  font-size: 40px;
+}
+
+.form-fields{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-form-field{
+  width:100%;
+}
+
+.birthdate-title{
+  color: white;
+  font-family: "chirp bold";
+}
+
+.date-selectors{
+  display: flex;
+  gap: 15px;
+}
+
+.select-date{
+  border: 1px solid white;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+mat-option{
+  text-align: center;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+
+::ng-deep .mat-select-value{
+  color: white;
+}
+
+::ng-deep .mat-select-content{
+    width:100px;
+    background-color: white;
+    font-size: 10px;
+}
+
+.next-btn{
+  width: 58%;
+  color: #ffffff;
+  font-family: "chirp bold";
+  font-size: 18px;
+  margin-top: 2em;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.next-btn:hover {
+  background-color: #1984cb;
+}
+
+.next-btn:active {
+  transform: scale(0.95);
+}
+
+.container2{
+  color: white;
+}

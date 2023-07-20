@@ -1,3 +1,5 @@
+
+
 .container{
   background-color: black;
   display: flex;
@@ -106,6 +108,7 @@
 .divider span{
   background:#000000;
   padding:0 10px;
+  color: white;
 }
 
 .login-input-form-field{
@@ -113,11 +116,8 @@
   width: 300px;
   flex-direction: column;
   justify-content: center;
-}
-
-.login-input{
-
-  height: 50px;
+  color: white;
+  border-color:  white;
 }
 
 .login-btn {
@@ -149,7 +149,7 @@
 
 .forgot-password-btn{
   background-color: #000000;
-  color: #ffffff;
+  color: white;
   font-family: "chirp bold";
   width: 300px;
   font-size: 18px;
@@ -175,9 +175,19 @@
 
 .signup{
   margin-top: 1em;
+  color: white;
 }
 
 .signup-btn{
   color: #1984cb;
   cursor: pointer;
 }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+
+::ng-deep .mat-select-value{
+  color: white;
+}
+

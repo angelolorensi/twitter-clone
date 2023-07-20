@@ -46,5 +46,26 @@ html, body{
   color: #536471;
 }
 
+.dialog .mat-dialog-container{
+  background-color: #000000;
+}
+
+mat-label{
+  color: white;
+}
+
+.close-btn{
+  height: 40px;
+  width: 40px;
+  background-color: black;
+  border: none;
+}
+
+.close-btn:hover{
+  background-color: #252525;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
