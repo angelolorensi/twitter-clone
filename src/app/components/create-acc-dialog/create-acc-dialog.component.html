@@ -4,7 +4,7 @@
 </div>
 <div class="container" *ngIf="page1">
   <h1 class="title">Criar sua conta</h1>
-  <form class="form-fields" [formGroup]="form">
+  <form class="form-fields" (submit)="onNextBtnClicked()" [formGroup]="registerForm">
     <mat-form-field class="input-form-field" color="primary" appearance="outline">
       <mat-label>Nome</mat-label>
       <input matInput formControlName="name"/>
@@ -15,10 +15,11 @@
     </mat-form-field>
 
     <h1 class="birthdate-title">Data de nascimento:</h1>
+    <p class="birthdate-subtitle">Isso não será exibido publicamente. Confirme sua própria idade, mesmo se esta conta for de empresa, de um animal de estimação ou outros.</p>
     <div class="date-selectors">
       <mat-form-field class="select-date">
         <mat-label>Dia</mat-label>
-        <mat-select matNativeControl formControlName="dia">
+        <mat-select matNativeControl formControlName="day">
           <mat-option value="1">1</mat-option>
           <mat-option value="2">2</mat-option>
           <mat-option value="3">3</mat-option>
@@ -54,7 +55,7 @@
       </mat-form-field>
       <mat-form-field class="select-date">
         <mat-label>Mês</mat-label>
-        <mat-select matNativeControl formControlName="mes">
+        <mat-select matNativeControl formControlName="month">
           <mat-option value="Janeiro">Janeiro</mat-option>
           <mat-option value="Fevereiro">Fevereiro</mat-option>
           <mat-option value="Março">Março</mat-option>
@@ -71,14 +72,55 @@
       </mat-form-field>
       <mat-form-field class="select-date">
         <mat-label>Ano</mat-label>
-        <mat-select formControlName="ano">
+        <mat-select formControlName="year">
             <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <button class="next-btn bg-blue" (click)="onNextBtnClicked()">Avançar</button>
+    <button class="next-btn bg-blue" type="submit">Avançar</button>
   </form>
 </div>
 <div class="container2" *ngIf="page2">
-  pagina 2
+  <h1 class="title">Confirme seus dados</h1>
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input (click)="onWrongUserDataClicked()" [(ngModel)]="username" matInput/>
+    </mat-form-field>
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input (click)="onWrongUserDataClicked()" [(ngModel)]="email" matInput/>
+    </mat-form-field>
+    <div class="error" *ngIf="registerForm.get('email')?.hasError('emailError')">
+        {{ registerForm.get('email')?.getError('emailError') }}
+    </div>
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>Data de nascimento</mat-label>
+      <input (click)="onWrongUserDataClicked()" [(ngModel)]="dob" matInput/>
+    </mat-form-field>
+    <p>Ao se inscrever, você concorda com nossos <a class="hyper-link">Termos</a>, com a <a class="hyper-link">Política de Privacidade</a> e com o <a class="hyper-link">Uso de Cookies</a>. O Twitter pode usar suas informações de contato, inclusive seu endereço de e-mail e seu número de telefone, para os fins descritos na nossa Política de Privacidade. <a class="hyper-link">Saiba mais</a></p>
+    <button class="next-btn bg-blue" (click)="onRegister()">Inscrever-se</button>
+</div>
+<div class="container2" *ngIf="page3">
+  <h1 class="title">Adicione um telefone</h1>
+  <p>Adicione um telefone para associar com sua conta do Twitter Clone. <br> Você não recebera um código de verificação.</p>
+  <form class="form-fields" (submit)="onSubmitPhoneNumber()" [formGroup]="phoneForm">
+    <mat-form-field class="select-date">
+        <mat-label>Código do país</mat-label>
+        <mat-select matNativeControl formControlName="countryCode">
+          <mat-option *ngFor="let code of countryCodes" [value]="code.dial_code">
+            {{code.name}} ({{ code.dial_code }})
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>Número do Telefone</mat-label>
+      <input matInput formControlName="phoneNo"/>
+    </mat-form-field>
+    <p>Permitir pessoas que tem seu numero de telefone encontrar e conectar com você no Twitter Clone. <a class="hyper-link">Saiba mais.</a></p>
+    <mat-checkbox></mat-checkbox>
+    <br>
+    <p>Permitir que o Twitter clone use seu numero de telefone para personalizar nossos serviços, incluindo propagando, Se não permitir isto, o Twitter Clone ainda usara seu numero de telefone para propositos do tipo segurança da conta, prevenção de fraudes, spam e abusos. Veja nossa <a class="hyper-link">Politica de Privacidade</a> para mais informações.</p>
+    <mat-checkbox></mat-checkbox>
+    <button class="next-btn bg-blue" type="submit">Inscrever-se</button>
+  </form>
 </div>

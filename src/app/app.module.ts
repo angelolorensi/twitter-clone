@@ -12,9 +12,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateAccDialogComponent } from './components/create-acc-dialog/create-acc-dialog.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
