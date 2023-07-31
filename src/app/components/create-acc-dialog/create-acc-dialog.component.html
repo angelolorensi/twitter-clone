@@ -124,3 +124,17 @@
     <button class="next-btn bg-blue" type="submit">Inscrever-se</button>
   </form>
 </div>
+<div class="container2" *ngIf="page4">
+  <h1 class="title">Enviamos um código para seu email.</h1>
+  <p>Insira o código recebido abaixo.</p>
+  <form [formGroup]="codeForm" (submit)="sendCode()">
+    <mat-form-field class="input-form-field" color="primary" appearance="outline">
+      <mat-label>Código de Verificação</mat-label>
+      <input matInput formControlName="code"/>
+    </mat-form-field>
+    <button class="next-btn bg-blue" type="submit">Enviar</button>
+  </form>
+</div>
+<div class="container2" *ngIf="page5">
+
+</div>

@@ -1,3 +1,4 @@
+import { CodeVerification } from './../../model/CodeVerification';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,5 +21,9 @@ export class RegisterService {
 
   public sendVerificationEmail(updatePhone: UpdatePhone): Observable<UpdatePhone> {
     return this.http.post<UpdatePhone>('http://localhost:8000/auth/email/code', updatePhone);
+  }
+
+  public verifyCode(codeVerification: CodeVerification): Observable<CodeVerification> {
+    return this.http.post<CodeVerification>('http://localhost:8000/auth/email/verify', codeVerification);
   }
 }

@@ -4,8 +4,10 @@ import { MatDialogRef, _closeDialogVia } from '@angular/material/dialog';
 import { RegisterService } from 'src/app/services/register/register.service';
 import { User } from 'src/app/model/User';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { countries } from 'src/app/shared/country-codes'
+import { countries } from 'src/app/shared/country-codes';
 import { UpdatePhone } from 'src/app/model/UpdatePhone';
+import { catchError, of, switchMap } from 'rxjs';
+import { CodeVerification } from 'src/app/model/CodeVerification';
 
 @Component({
   selector: 'app-create-acc-dialog',
@@ -15,12 +17,15 @@ import { UpdatePhone } from 'src/app/model/UpdatePhone';
 export class CreateAccDialogComponent implements OnInit {
   registerForm: FormGroup;
   phoneForm: FormGroup;
+  codeForm: FormGroup;
   years: number[] = [];
   stepCounter: number = 1;
   stepIcon: string = '';
   page1: boolean = true;
   page2: boolean = false;
   page3: boolean = false;
+  page4: boolean = false;
+  page5: boolean = false;
   username: string = '';
   email: string = '';
   dob: string = '';
@@ -51,7 +56,10 @@ export class CreateAccDialogComponent implements OnInit {
     };
     this.phoneForm = fb.group({
       countryCode: ['', Validators.required],
-      phoneNo: ['', Validators.required]
+      phoneNo: ['', Validators.required],
+    });
+    this.codeForm = fb.group({
+      code: ['', Validators.required],
     });
   }
 
@@ -62,15 +70,8 @@ export class CreateAccDialogComponent implements OnInit {
 
   onRegister() {
     //convert string date to Date object
-    this.monthConverted = this.convertMonthToNumber(
-      this.registerForm.value.month
-    );
-    this.dob =
-      this.registerForm.value.year +
-      '-' +
-      this.monthConverted +
-      '-' +
-      this.registerForm.value.day;
+    this.monthConverted = this.convertMonthToNumber(this.registerForm.value.month);
+    this.dob =this.registerForm.value.year + '-' +this.monthConverted + '-' +this.registerForm.value.day;
     const dateObject = new Date(this.dob);
     const serializedDate = dateObject.toISOString();
 
@@ -99,24 +100,44 @@ export class CreateAccDialogComponent implements OnInit {
 
   onSubmitPhoneNumber() {
     this.completePhoneNo =this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
-    const updatePhone: UpdatePhone = new UpdatePhone(this.registerForm.value.name, this.completePhoneNo);
-    this.registerService.updateUserPhone(updatePhone).subscribe(
+    const updatePhone: UpdatePhone = new UpdatePhone(this.registerForm.value.name,this.completePhoneNo);
+
+    this.registerService
+      .updateUserPhone(updatePhone)
+      .pipe(
+        switchMap(() =>
+          this.registerService.sendVerificationEmail(updatePhone).pipe(
+            catchError((emailError) => {
+              return of(null);
+            })
+          )
+        )
+      )
+      .subscribe(
+        () => {
+          this.stepCounter++
+          this.page3 = false;
+          this.page4 = true;
+        },
+        (updateError) => {
+          this.snackbar.open('Erro ao registrar telefone', 'fechar');
+        }
+      );
+  }
+
+  sendCode() {
+    const verificationCode = new CodeVerification(this.codeForm.value.code, this.registerForm.value.name)
+
+    this.registerService.verifyCode(verificationCode).subscribe(
       (data) => {
-        this.registerService.sendVerificationEmail(updatePhone).subscribe(
-          (data) => {},
-          (error) => {
-            this.snackbar.open(
-              'Falha ao enviar o email!, tente novamente',
-              'fechar'
-            );
-          }
-        );
+        this.page4 = false;
+        this.page5 = true;
+        this.stepCounter++;
       },
       (error) => {
-        this.snackbar.open('Erro ao registrar telefone','fechar');
+        alert(error)
       }
-    );
-
+    )
   }
 
   onNextBtnClicked() {
@@ -124,7 +145,12 @@ export class CreateAccDialogComponent implements OnInit {
       //set user input data from page 1 to page 2 for confirmation
       this.username = this.registerForm.value.name;
       this.email = this.registerForm.value.email;
-      this.dob =this.registerForm.value.day + ' de ' +this.registerForm.value.month + ' de ' +this.registerForm.value.year;
+      this.dob =
+        this.registerForm.value.day +
+        ' de ' +
+        this.registerForm.value.month +
+        ' de ' +
+        this.registerForm.value.year;
       //change page
       this.page1 = false;
       this.page2 = true;
@@ -162,6 +188,10 @@ export class CreateAccDialogComponent implements OnInit {
       this.stepIcon = 'arrow_back';
       this.page2 = true;
       this.page3 = false;
+    } else if (this.stepCounter == 3) {
+      this.stepIcon = 'arrow_back';
+      this.page3 = true;
+      this.page4 = false;
     } else if (this.stepCounter == 0) {
       this.dialogRef.close();
     } else {
@@ -208,4 +238,3 @@ export class CreateAccDialogComponent implements OnInit {
     }
   }
 }
-
