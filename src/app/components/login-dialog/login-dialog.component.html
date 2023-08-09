@@ -1,5 +1,5 @@
 <button class="close-btn"><mat-icon  color="accent" matDialogClose>close</mat-icon></button>
-<div mat-dialog-content class="container">
+<div mat-dialog-content class="container" >
   <img class="logo" src="assets/img/twitter-logo.png" />
   <h1 class="title">Entrar no Twitter</h1>
   <div class="btns">
@@ -9,13 +9,19 @@
     <button class="btns-apple-btn"><span></span>Inscrever-se com Apple</button>
   </div>
   <p class="divider"><span>ou</span></p>
-  <form>
-    <mat-form-field class="login-input-form-field" color="primary" appearance="outline">
-      <mat-label>Celular, e-mail ou nome de usuário</mat-label>
-      <input matInput/>
+  <form [formGroup]="loginForm">
+    <mat-form-field *ngIf="usernameInput" class="login-input-form-field" color="primary" appearance="outline">
+      <mat-label>Nome de usuário</mat-label>
+      <input type="text" matInput formControlName="username"/>
     </mat-form-field>
-    <button class="login-btn" type="submit">Avançar</button>
+    <mat-form-field *ngIf="passwordInput" class="login-input-form-field" color="primary" appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput formControlName="password"/>
+    </mat-form-field>
+    <button class="login-btn" type="submit" (click)="nextBtn()" *ngIf="usernameInput">Avançar</button>
+    <button class="login-btn" type="submit" (click)="loginBtn()" *ngIf="passwordInput">Login</button>
   </form>
   <button class="forgot-password-btn">Esqueceu sua senha?</button>
-  <p class="signup">Não tem uma conta? <a class="signup-btn">Inscreva-se</a></p>
+  <p class="signup">Não tem uma conta? <a class="signup-btn" (click)="createAccBtn()">Inscreva-se</a></p>
 </div>
+

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, _closeDialogVia } from '@angular/material/dialog';
-import { RegisterService } from 'src/app/services/register/register.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { User } from 'src/app/model/User';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { countries } from 'src/app/shared/country-codes';
-import { UpdatePhone } from 'src/app/model/UpdatePhone';
+import { UpdatePhone } from 'src/app/model/requests/UpdatePhone';
 import { catchError, of, switchMap } from 'rxjs';
-import { CodeVerification } from 'src/app/model/CodeVerification';
+import { CodeVerification } from 'src/app/model/requests/CodeVerification';
+import { PasswordChange } from 'src/app/model/requests/PasswordChange';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-acc-dialog',
@@ -15,9 +17,11 @@ import { CodeVerification } from 'src/app/model/CodeVerification';
   styleUrls: ['./create-acc-dialog.component.css'],
 })
 export class CreateAccDialogComponent implements OnInit {
+  //Variables
   registerForm: FormGroup;
   phoneForm: FormGroup;
   codeForm: FormGroup;
+  passwordForm: FormGroup;
   years: number[] = [];
   stepCounter: number = 1;
   stepIcon: string = '';
@@ -39,18 +43,19 @@ export class CreateAccDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateAccDialogComponent>,
     private fb: FormBuilder,
-    private registerService: RegisterService,
-    private snackbar: MatSnackBar
+    private authService: AuthenticationService,
+    private snackbar: MatSnackBar,
+    private router: Router
   ) {
     this.registerForm = fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       day: ['', [Validators.required]],
       month: ['', [Validators.required]],
       year: ['', [Validators.required]],
     });
     this.user = {
-      name: '',
+      username: '',
       email: '',
       dob: '',
     };
@@ -61,6 +66,9 @@ export class CreateAccDialogComponent implements OnInit {
     this.codeForm = fb.group({
       code: ['', Validators.required],
     });
+    this.passwordForm = fb.group({
+      password: ['', Validators.required],
+    });
   }
 
   ngOnInit(): void {
@@ -68,29 +76,37 @@ export class CreateAccDialogComponent implements OnInit {
     this.setStepIcon();
   }
 
+  //add name, email and date of birth to the user account
   onRegister() {
     //convert string date to Date object
-    this.monthConverted = this.convertMonthToNumber(this.registerForm.value.month);
-    this.dob =this.registerForm.value.year + '-' +this.monthConverted + '-' +this.registerForm.value.day;
+    this.monthConverted = this.convertMonthToNumber(
+      this.registerForm.value.month
+    );
+    this.dob =
+      this.registerForm.value.year +
+      '-' +
+      this.monthConverted +
+      '-' +
+      this.registerForm.value.day;
     const dateObject = new Date(this.dob);
     const serializedDate = dateObject.toISOString();
 
     //set user input data o a user object
     this.user.dob = serializedDate;
     this.user.email = this.registerForm.value.email;
-    this.user.name = this.registerForm.value.name;
+    this.user.username = this.registerForm.value.username;
 
     //send user registration request via service
-    this.registerService.registerUser(this.user).subscribe(
+    this.authService.registerUser(this.user).subscribe(
       (data) => {
         this.page2 = false;
         this.page3 = true;
         this.stepCounter++;
       },
       (error) => {
-        if ((error.error = 'The email provided is already taken')) {
+        if ((error.error = 'The username or email you provided is already in use')) {
           this.snackbar.open(
-            'Este email ja está em uso, tente com um diferente.',
+            'Este nome de usuario ou email ja está em uso, tente com um diferente.',
             'fechar'
           );
         }
@@ -98,15 +114,20 @@ export class CreateAccDialogComponent implements OnInit {
     );
   }
 
+  //add a phone number to the user account
   onSubmitPhoneNumber() {
-    this.completePhoneNo =this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
-    const updatePhone: UpdatePhone = new UpdatePhone(this.registerForm.value.name,this.completePhoneNo);
+    this.completePhoneNo =
+      this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
+    const updatePhone: UpdatePhone = new UpdatePhone(
+      this.registerForm.value.username,
+      this.completePhoneNo
+    );
 
-    this.registerService
+    this.authService
       .updateUserPhone(updatePhone)
       .pipe(
         switchMap(() =>
-          this.registerService.sendVerificationEmail(updatePhone).pipe(
+          this.authService.sendVerificationEmail(updatePhone).pipe(
             catchError((emailError) => {
               return of(null);
             })
@@ -115,7 +136,7 @@ export class CreateAccDialogComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.stepCounter++
+          this.stepCounter++;
           this.page3 = false;
           this.page4 = true;
         },
@@ -125,49 +146,41 @@ export class CreateAccDialogComponent implements OnInit {
       );
   }
 
-  sendCode() {
-    const verificationCode = new CodeVerification(this.codeForm.value.code, this.registerForm.value.name)
+  //send verification code to email
+  sendVerificationCode() {
+    const verificationCode = new CodeVerification(
+      this.codeForm.value.code,
+      this.registerForm.value.username
+    );
 
-    this.registerService.verifyCode(verificationCode).subscribe(
+    this.authService.verifyCode(verificationCode).subscribe(
       (data) => {
         this.page4 = false;
         this.page5 = true;
         this.stepCounter++;
       },
       (error) => {
-        alert(error)
+        alert(error.error);
       }
-    )
+    );
   }
 
-  onNextBtnClicked() {
-    if (this.registerForm.valid) {
-      //set user input data from page 1 to page 2 for confirmation
-      this.username = this.registerForm.value.name;
-      this.email = this.registerForm.value.email;
-      this.dob =
-        this.registerForm.value.day +
-        ' de ' +
-        this.registerForm.value.month +
-        ' de ' +
-        this.registerForm.value.year;
-      //change page
-      this.page1 = false;
-      this.page2 = true;
-      this.stepCounter++;
-      this.setStepIcon();
-    } else {
-      return;
-    }
-  }
+  //add a password to the account
+  changePassword() {
+    const changePassword = new PasswordChange(
+      this.registerForm.value.username,
+      this.passwordForm.value.password
+    );
 
-  onStepBtnClicked() {
-    if (this.stepCounter > 0) {
-      this.stepCounter = this.stepCounter - 1;
-      this.setStepIcon();
-    } else {
-      this.stepCounter = 1;
-    }
+    this.authService.changePassword(changePassword).subscribe(
+      (data) => {
+        this.dialogRef.close();
+        this.snackbar.open("Conta registrada com sucesso, Acesse sua conta para começar a usar", "fechar");
+      },
+      (error) => {
+        alert(error.error);
+      }
+    );
   }
 
   //when user input on page 2 is wrong go back to page 1
@@ -192,10 +205,44 @@ export class CreateAccDialogComponent implements OnInit {
       this.stepIcon = 'arrow_back';
       this.page3 = true;
       this.page4 = false;
+    } else if (this.stepCounter == 4) {
+      this.stepIcon = 'arrow_back';
+      this.page4 = true;
+      this.page5 = false;
     } else if (this.stepCounter == 0) {
       this.dialogRef.close();
     } else {
       this.stepIcon = 'arrow_back';
+    }
+  }
+
+  onNextBtnClicked() {
+    if (this.registerForm.valid) {
+      //set user input data from page 1 to page 2 for confirmation
+      this.username = this.registerForm.value.username;
+      this.email = this.registerForm.value.email;
+      this.dob =
+        this.registerForm.value.day +
+        ' de ' +
+        this.registerForm.value.month +
+        ' de ' +
+        this.registerForm.value.year;
+      //change page
+      this.page1 = false;
+      this.page2 = true;
+      this.stepCounter++;
+      this.setStepIcon();
+    } else {
+      return;
+    }
+  }
+
+  onStepBtnClicked() {
+    if (this.stepCounter > 0) {
+      this.stepCounter = this.stepCounter - 1;
+      this.setStepIcon();
+    } else {
+      this.stepCounter = 1;
     }
   }
 
