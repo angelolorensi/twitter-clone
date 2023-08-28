@@ -18,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ForgotPasswordDialogComponent } from './components/forgot-password-dialog/forgot-password-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HomeComponent,
     LoginDialogComponent,
     CreateAccDialogComponent,
+    ForgotPasswordDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HttpClientModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent],

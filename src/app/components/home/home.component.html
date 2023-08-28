@@ -76,9 +76,9 @@
         <div class="post-header">
           <div class="post-headerText">
             <h3>
-              Somanath Goudar
+              {{nickname}}
               <span class="post-headerSpecial"
-                ><span class="material-icons post-badge"> verified </span>@somanathg</span
+                ><span class="material-icons post-badge"> verified </span>@{{username}}</span
               >
             </h3>
           </div>
@@ -86,10 +86,9 @@
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
           </div>
         </div>
-        <img
-          src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
-          alt=""
-        />
+          <img
+            src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
+          />
         <div class="post-footer">
           <mat-icon class="post-footer-icon">chat_bubble</mat-icon>
           <mat-icon class="post-footer-icon"> repeat </mat-icon>
@@ -104,11 +103,11 @@
   <div class="widgets">
     <div class="widgets-input">
       <span class="material-icons widgets-searchIcon"> search </span>
-      <input type="text" placeholder="Search Twitter" />
+      <input class="widgets-input-search" type="text" placeholder="Search Twitter" />
     </div>
     <div class="widgets-widgetContainer">
       <h2>What's happening?</h2>
-      
+
     </div>
   </div>
 

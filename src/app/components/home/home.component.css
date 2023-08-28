@@ -270,6 +270,10 @@ mat-icon{
   background-color: var(--twitter-background);
 }
 
+.widgets-input-search{
+  color: white;
+}
+
 .widgets-searchIcon {
   color: gray;
 }

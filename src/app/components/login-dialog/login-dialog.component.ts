@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Login } from 'src/app/model/requests/Login';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-login-dialog',
@@ -23,8 +24,8 @@ export class LoginDialogComponent implements OnInit {
               private authService:AuthenticationService,
               private router:Router) {
     this.loginForm = fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: [null, Validators.required],
+      password: [null, Validators.required]
     })
   }
 
@@ -45,8 +46,7 @@ export class LoginDialogComponent implements OnInit {
         this.dialogRef.close();
       },
       error => {
-        console.log(error);
-
+        this.loginForm.get('password')?.setErrors({invalidCredentials : true});
       }
     )
   }
@@ -55,6 +55,12 @@ export class LoginDialogComponent implements OnInit {
     this.dialog.open(CreateAccDialogComponent, {
       panelClass: 'dialog',
     });
+  }
+
+  forgotPassword(){
+    this.dialog.open(ForgotPasswordDialogComponent, {
+      panelClass: 'dialog',
+    })
   }
 
 }
