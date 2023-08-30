@@ -45,6 +45,9 @@ export class HomeComponent implements OnInit {
 
     this.username = localStorage.getItem('username');
     this.nickname = localStorage.getItem('nickname');
+    if(this.nickname == 'null'){
+      this.nickname = this.username;
+    }
     this.email = localStorage.getItem('email');
     this.phone = localStorage.getItem('phone');
   }
