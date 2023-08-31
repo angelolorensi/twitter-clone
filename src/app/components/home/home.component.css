@@ -148,8 +148,19 @@ mat-icon{
   background-color: #252525;
 }
 
+.tweetBox-options{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5.5em;
+  padding-right: 1.3em;
+}
+
+.tweetBox-options-selection{
+  display: flex;
+  gap: 1em;
+}
+
 .tweetBox-btn{
-  float: right;
   width: 10%;
   height: 40px;
   color: white;
@@ -174,6 +185,11 @@ mat-icon{
 
 .tweetBox-btn:active {
   transform: scale(0.95);
+}
+
+.tweetBox-icons{
+  font-size: 25px;
+  cursor: pointer;
 }
 
 .post-avatar img {

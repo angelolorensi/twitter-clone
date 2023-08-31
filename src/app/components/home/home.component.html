@@ -49,8 +49,8 @@
       <h2>Home</h2>
     </div>
     <div class="feed-subheader">
-      <h2>For you</h2>
-      <h2>Following</h2>
+      <h2 [style.text-decoration]="fyHeader" (click)="getSelectedHeader('For You')">For you</h2>
+      <h2 [style.text-decoration]="followingHeader" (click)="getSelectedHeader('Following')">Following</h2>
     </div>
 
     <div class="tweetBox">
@@ -59,7 +59,15 @@
           <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt=""/>
           <textarea type="text" placeholder="What's happening?"></textarea>
         </div>
-        <div>
+        <div class="tweetBox-options">
+          <div class="tweetBox-options-selection">
+            <mat-icon color="primary" class="tweetBox-icons">image</mat-icon>
+            <mat-icon color="primary" class="tweetBox-icons">gif_box</mat-icon>
+            <mat-icon color="primary" class="tweetBox-icons">ballot</mat-icon>
+            <mat-icon color="primary" class="tweetBox-icons">mood</mat-icon>
+            <mat-icon color="primary" class="tweetBox-icons">calendar_month</mat-icon>
+            <mat-icon color="primary" class="tweetBox-icons">location_on</mat-icon>
+          </div>
           <button class="tweetBox-btn">Post</button>
         </div>
       </form>
@@ -90,7 +98,7 @@
             src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
           />
         <div class="post-footer">
-          <mat-icon class="post-footer-icon">chat_bubble</mat-icon>
+          <mat-icon class="post-footer-icon"> chat_bubble </mat-icon>
           <mat-icon class="post-footer-icon"> repeat </mat-icon>
           <mat-icon class="post-footer-icon"> favorite_border </mat-icon>
           <mat-icon class="post-footer-icon"> publish </mat-icon>
