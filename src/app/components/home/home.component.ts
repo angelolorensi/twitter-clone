@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   //header style variables
-  fyHeader: string = 'underline #1672b0';
-  followingHeader : string = '';
+  fyHeader: string = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
+  followingHeader: string = '';
 
   //data variables
   token:string | null = '';
@@ -60,11 +60,11 @@ export class HomeComponent implements OnInit {
 
   getSelectedHeader(header: string){
     if(header == 'For You'){
-      this.fyHeader = 'underline #1672b0';
+      this.fyHeader = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
       this.followingHeader = '';
     }
     if(header == 'Following'){
-      this.followingHeader = 'underline #1672b0';
+      this.followingHeader = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
       this.fyHeader = '';
     }
   }
