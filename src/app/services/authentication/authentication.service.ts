@@ -20,49 +20,28 @@ export class AuthenticationService {
   }
 
   public updateUserPhone(updatePhone: UpdatePhone): Observable<UpdatePhone> {
-    return this.http.put<UpdatePhone>(
-      'http://localhost:8000/auth/update/phone',
-      updatePhone
-    );
+    return this.http.put<UpdatePhone>('http://localhost:8000/auth/update/phone',updatePhone);
   }
 
-  public sendVerificationEmail(
-    updatePhone: UpdatePhone
-  ): Observable<UpdatePhone> {
-    return this.http.post<UpdatePhone>(
-      'http://localhost:8000/auth/email/code',
-      updatePhone
-    );
+  public sendVerificationEmail(updatePhone: UpdatePhone): Observable<UpdatePhone> {
+    return this.http.post<UpdatePhone>('http://localhost:8000/auth/email/code',updatePhone);
   }
 
-  public verifyCode(
-    codeVerification: CodeVerification
-  ): Observable<CodeVerification> {
-    return this.http.post<CodeVerification>(
-      'http://localhost:8000/auth/email/verify',
-      codeVerification
-    );
+  public verifyCode(codeVerification: CodeVerification): Observable<CodeVerification>{
+    return this.http.post<CodeVerification>('http://localhost:8000/auth/email/verify',codeVerification);
   }
 
-  public changePassword(
-    passwordChange: PasswordChange
-  ): Observable<PasswordChange> {
-    return this.http.put<PasswordChange>(
-      'http://localhost:8000/auth/update/password',
-      passwordChange
-    );
+  public changePassword(passwordChange: PasswordChange): Observable<PasswordChange> {
+    return this.http.put<PasswordChange>('http://localhost:8000/auth/update/password',passwordChange);
   }
 
   public login(login: Login): Observable<any> {
-    return this.http.post<LoginResponse>(
-      'http://localhost:8000/auth/login',
-      login
-    );
+    return this.http.post<LoginResponse>('http://localhost:8000/auth/login', login);
   }
 
   public userLoggedIn(token: any): Observable<any> {
     return this.http.get('http://localhost:8000/user/verify', {
-      headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
+      headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
     });
   }
 

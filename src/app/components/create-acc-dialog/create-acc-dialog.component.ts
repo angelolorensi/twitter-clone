@@ -17,12 +17,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-acc-dialog.component.css'],
 })
 export class CreateAccDialogComponent implements OnInit {
-  //Variables
+  //FormGroup variables
   registerForm: FormGroup;
   phoneForm: FormGroup;
   codeForm: FormGroup;
   passwordForm: FormGroup;
-  years: number[] = [];
+
+  //Page change variables
   stepCounter: number = 1;
   stepIcon: string = '';
   page1: boolean = true;
@@ -30,6 +31,9 @@ export class CreateAccDialogComponent implements OnInit {
   page3: boolean = false;
   page4: boolean = false;
   page5: boolean = false;
+
+  //Data variables
+  years: number[] = [];
   username: string = '';
   email: string = '';
   dob: string = '';
