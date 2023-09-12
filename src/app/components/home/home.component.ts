@@ -1,6 +1,8 @@
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,7 @@ export class HomeComponent implements OnInit {
   followingHeader: string = '';
 
   //data variables
+  userId: number | null = null;
   token:string | null = '';
   username:string | null  = '';
   nickname:string | null = '';
@@ -20,13 +23,22 @@ export class HomeComponent implements OnInit {
   dob:string | null = '';
   phone:string | null = '';
 
+  //image variables
   selectedImage: File | null = null;
   imageUrl: string | ArrayBuffer | null | undefined = null;
 
+  //form variables
+  tweetForm: FormGroup
+
   constructor(
     private router:Router,
-    private authService:AuthenticationService
+    private authService:AuthenticationService,
+    private fb:FormBuilder,
+    private postService: PostService
   ) {
+    this.tweetForm = fb.group({
+      tweetContent: ['']
+    })
   }
 
   ngOnInit(): void {
@@ -60,6 +72,11 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('enabled', data.enabled);
         localStorage.setItem('phone', data.phone);
 
+        const userId: string | null = localStorage.getItem('id');
+        if(userId !== null){
+          this.userId = parseFloat(userId);
+        }
+
         //set data to page
         this.username = localStorage.getItem('username');
         this.nickname = localStorage.getItem('nickname');
@@ -73,6 +90,33 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     );
+  }
+
+  submitTweet(){
+    const tweetData = {
+      content: this.tweetForm.value.tweetContent,
+      author: {
+        id: this.userId
+      },
+      replies: [],
+      scheduled: false,
+      scheduledDate: null,
+      audience: 'EVERYONE',
+      replyRestriction: 'EVERYONE',
+    }
+
+    const mediaFile = this.selectedImage;
+
+    if(mediaFile){
+      this.postService.createPostWithMedia(tweetData, mediaFile, this.token).subscribe(
+        data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }
   }
 
   handleImageSelected(event: any) {
