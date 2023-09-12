@@ -59,7 +59,7 @@
           <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
           <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
         </div>
-        <img class="tweetBox-tweetImg" [src]="imageUrl">
+        <img class="tweetBox-tweetImg" [src]="imageUrl" *ngIf="showImage">
         <div class="tweetBox-options">
           <div class="tweetBox-options-selection">
             <mat-icon (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>

@@ -39,10 +39,8 @@ export class AuthenticationService {
     return this.http.post<LoginResponse>('http://localhost:8000/auth/login', login);
   }
 
-  public userLoggedIn(token: any): Observable<any> {
-    return this.http.get('http://localhost:8000/user/verify', {
-      headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
-    });
+  public userLoggedIn(): Observable<any> {
+    return this.http.get('http://localhost:8000/user/verify');
   }
 
   public getResetPasswdCode(email:string):Observable<any>{

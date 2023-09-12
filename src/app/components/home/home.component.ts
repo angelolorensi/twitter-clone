@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   //image variables
   selectedImage: File | null = null;
   imageUrl: string | ArrayBuffer | null | undefined = null;
+  showImage: boolean = true;
 
   //form variables
   tweetForm: FormGroup
@@ -60,7 +61,7 @@ export class HomeComponent implements OnInit {
   loadData(){
     //check if logged in
     this.token = localStorage.getItem('token');
-    this.authService.userLoggedIn(this.token).subscribe(
+    this.authService.userLoggedIn().subscribe(
       (data) =>{
         localStorage.setItem('id', data.id);
         localStorage.setItem('username', data.username);
@@ -72,6 +73,7 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('enabled', data.enabled);
         localStorage.setItem('phone', data.phone);
 
+        //convert id to number
         const userId: string | null = localStorage.getItem('id');
         if(userId !== null){
           this.userId = parseFloat(userId);
@@ -88,6 +90,7 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         this.router.navigateByUrl('/login');
+        alert("error:" + error.error)
       }
     );
   }
@@ -108,18 +111,31 @@ export class HomeComponent implements OnInit {
     const mediaFile = this.selectedImage;
 
     if(mediaFile){
-      this.postService.createPostWithMedia(tweetData, mediaFile, this.token).subscribe(
+      this.postService.createPostWithMedia(tweetData, mediaFile).subscribe(
         data => {
-          console.log(data)
+          console.log("media post saved");
+          this.showImage = false;
+          this.tweetForm.get('tweetContent')?.setValue('')
         },
         error => {
-          console.log(error)
+          console.log(error);
+        }
+      )
+    } else {
+      this.postService.createPost(tweetData).subscribe(
+        data => {
+          console.log("text post saved");
+          this.tweetForm.value.tweetContent = '';
+        },
+        error => {
+          console.log(error);
         }
       )
     }
   }
 
   handleImageSelected(event: any) {
+    this.showImage = true;
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       this.selectedImage = selectedFile;
@@ -133,6 +149,7 @@ export class HomeComponent implements OnInit {
   }
 
   handleGifSelected(event: any){
+    this.showImage = true;
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       console.log('Selected file:', selectedFile);
