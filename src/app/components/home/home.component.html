@@ -63,9 +63,9 @@
         <div class="tweetBox-options">
           <div class="tweetBox-options-selection">
             <mat-icon (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
-            <input #imageInput type="file" style="display: none;" (change)="handleImageSelected($event)">
+            <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
             <mat-icon (click)="gifInput.click()" color="primary" class="tweetBox-icons">gif_box</mat-icon>
-            <input #gifInput type="file" style="display: none;" (change)="handleGifSelected($event)">
+            <input #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
             <mat-icon color="primary" class="tweetBox-icons">ballot</mat-icon>
             <mat-icon color="primary" class="tweetBox-icons">mood</mat-icon>
             <mat-icon color="primary" class="tweetBox-icons">calendar_month</mat-icon>

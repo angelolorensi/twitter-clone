@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   fyHeader: string = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
   followingHeader: string = '';
 
-  //data variables
+  //user data variables
   userId: number | null = null;
   token:string | null = '';
   username:string | null  = '';
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   dob:string | null = '';
   phone:string | null = '';
 
-  //image variables
+  //new tweet image variables
   selectedImage: File | null = null;
   imageUrl: string | ArrayBuffer | null | undefined = null;
   showImage: boolean = true;
@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('dob', data.dateOfBirth);
         localStorage.setItem('profilePicture', data.profilePicture);
         localStorage.setItem('bannerPicture', data.bannerPicture);
-        localStorage.setItem('enabled', data.enabled);
         localStorage.setItem('phone', data.phone);
 
         //convert id to number
