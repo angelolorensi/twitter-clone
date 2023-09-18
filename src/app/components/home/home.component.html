@@ -62,14 +62,14 @@
         <img class="tweetBox-tweetImg" [src]="imageUrl" *ngIf="showImage">
         <div class="tweetBox-options">
           <div class="tweetBox-options-selection">
-            <mat-icon (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
+            <mat-icon title="Image" (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
             <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
             <mat-icon (click)="gifInput.click()" color="primary" class="tweetBox-icons">gif_box</mat-icon>
-            <input #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
-            <mat-icon color="primary" class="tweetBox-icons">ballot</mat-icon>
-            <mat-icon color="primary" class="tweetBox-icons">mood</mat-icon>
-            <mat-icon color="primary" class="tweetBox-icons">calendar_month</mat-icon>
-            <mat-icon color="primary" class="tweetBox-icons">location_on</mat-icon>
+            <input title="Gif" #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
+            <mat-icon title="Poll" color="primary" class="tweetBox-icons">ballot</mat-icon>
+            <mat-icon title="Emoji" color="primary" class="tweetBox-icons">mood</mat-icon>
+            <mat-icon title="Schedule" color="primary" class="tweetBox-icons">calendar_month</mat-icon>
+            <mat-icon title="Location" color="primary" class="tweetBox-icons">location_on</mat-icon>
           </div>
           <button class="tweetBox-btn" (click)="submitTweet()">Post</button>
         </div>
@@ -106,10 +106,10 @@
               </div>
             </ng-container>
             <div class="post-footer">
-              <mat-icon class="post-footer-icon"> chat_bubble </mat-icon>
-              <mat-icon class="post-footer-icon"> repeat </mat-icon>
-              <mat-icon class="post-footer-icon"> favorite_border </mat-icon>
-              <mat-icon class="post-footer-icon"> publish </mat-icon>
+              <mat-icon title="Reply" class="post-footer-icon"> chat_bubble </mat-icon>
+              <mat-icon title="Retweet" class="post-footer-icon"> repeat </mat-icon>
+              <mat-icon title="Favorite" class="post-footer-icon"> favorite_border </mat-icon>
+              <mat-icon title="Download" class="post-footer-icon"> publish </mat-icon>
             </div>
           </div>
         </div>

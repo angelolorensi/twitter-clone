@@ -129,6 +129,7 @@ export class HomeComponent implements OnInit {
           console.log("media post saved");
           this.showImage = false;
           this.tweetForm.get('tweetContent')?.setValue('')
+          this.loadPosts();
         },
         error => {
           console.log(error);
@@ -138,7 +139,8 @@ export class HomeComponent implements OnInit {
       this.postService.createPost(tweetData).subscribe(
         data => {
           console.log("text post saved");
-          this.tweetForm.value.tweetContent = '';
+          this.tweetForm.get('tweetContent')?.setValue('')
+          this.loadPosts();
         },
         error => {
           console.log(error);
