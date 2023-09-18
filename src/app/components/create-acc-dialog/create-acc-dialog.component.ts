@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, _closeDialogVia } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { User } from 'src/app/model/User';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { countries } from 'src/app/shared/country-codes';
 import { UpdatePhone } from 'src/app/model/requests/UpdatePhone';
@@ -10,6 +9,7 @@ import { catchError, of, switchMap } from 'rxjs';
 import { CodeVerification } from 'src/app/model/requests/CodeVerification';
 import { PasswordChange } from 'src/app/model/requests/PasswordChange';
 import { Router } from '@angular/router';
+import { RegistrationUser } from 'src/app/model/RegistrationUser';
 
 @Component({
   selector: 'app-create-acc-dialog',
@@ -37,7 +37,7 @@ export class CreateAccDialogComponent implements OnInit {
   username: string = '';
   email: string = '';
   dob: string = '';
-  user: User;
+  user: RegistrationUser;
   dateToSend: Date = new Date();
   monthConverted: number = 0;
   countryCodes: any[] = countries;

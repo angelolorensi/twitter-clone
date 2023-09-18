@@ -1,3 +1,4 @@
+import { RegistrationUser } from 'src/app/model/RegistrationUser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
@@ -7,7 +8,6 @@ import { PasswordChange } from 'src/app/model/requests/PasswordChange';
 import { UpdatePhone } from 'src/app/model/requests/UpdatePhone';
 import { IdentifierResponse } from 'src/app/model/responses/IdentifierResponse';
 import { LoginResponse } from 'src/app/model/responses/LoginResponse';
-import { User } from 'src/app/model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,8 @@ import { User } from 'src/app/model/User';
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
-  public registerUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8000/auth/register', user);
+  public registerUser(user: RegistrationUser): Observable<RegistrationUser> {
+    return this.http.post<RegistrationUser>('http://localhost:8000/auth/register', user);
   }
 
   public updateUserPhone(updatePhone: UpdatePhone): Observable<UpdatePhone> {

@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/model/Post';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +33,9 @@ export class HomeComponent implements OnInit {
   //form variables
   tweetForm: FormGroup
 
+  //posts variables
+  feedPosts?: any[];
+
   constructor(
     private router:Router,
     private authService:AuthenticationService,
@@ -45,6 +50,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //check if logged in
     this.loadData();
+    this.loadPosts();
   }
 
   getSelectedHeader(header: string){
@@ -90,6 +96,14 @@ export class HomeComponent implements OnInit {
       (error) => {
         this.router.navigateByUrl('/login');
         alert("error:" + error.error)
+      }
+    );
+  }
+
+  loadPosts(){
+    this.postService.getAllPosts().subscribe(
+      data => {
+        this.feedPosts = data;
       }
     );
   }

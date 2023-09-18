@@ -21,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { TokenInterceptor } from './services/token-interceptor/token.interceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TokenInterceptor } from './services/token-interceptor/token.interceptor
     HttpClientModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor,

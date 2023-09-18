@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/model/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +20,9 @@ export class PostService {
 
   public createPost(postData: any){
     return this.http.post<any>('http://localhost:8000/posts/', postData);
+  }
+
+  public getAllPosts(){
+    return this.http.get<any>('http://localhost:8000/posts/');
   }
 }

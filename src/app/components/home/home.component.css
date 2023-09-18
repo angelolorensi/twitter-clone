@@ -19,7 +19,6 @@ mat-icon{
 }
 
 .sidebar{
-  border-right: 1px solid #424242;
   flex: 0.2;
   min-width: 250px;
   padding-left: 20px;
@@ -82,6 +81,8 @@ mat-icon{
 .feed-header{
   padding: 15px 20px;
   border-bottom: 1px solid #424242;
+  border-left: 1px solid #424242;
+  border-right: 1px solid #424242;
 }
 
 .feed-header h2 {
@@ -93,6 +94,8 @@ mat-icon{
   justify-content: center;
   align-items: center;
   height: 5em;
+  border-left: 1px solid #424242;
+  border-right: 1px solid #424242;
 }
 
 .feed-subheader h2{
@@ -119,6 +122,8 @@ mat-icon{
   padding-bottom: 10px;
   border-bottom: 8px solid #252525;
   padding-right: 10px;
+  border-right: 1px solid #424242;
+  border-left: 1px solid #424242;
 }
 
 .tweetBox form {
@@ -214,11 +219,19 @@ mat-icon{
   opacity: 0.8;
 }
 
+ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .post {
   display: flex;
   align-items: flex-start;
   border-bottom: 1px solid #252525;
   padding-bottom: 10px;
+  border-right: 1px solid #424242;
+  border-left: 1px solid #424242;
 }
 
 .post-body img {
@@ -256,18 +269,24 @@ mat-icon{
 
 .post-headerSpecial {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 15px;
   color: gray;
 }
 
 .post-headerText h3 {
-  font-size: 15px;
+  font-size: 17px;
   margin-bottom: 5px;
+  color: #d1d1d1;
+  font-family: "chirp regular";
 }
 
 .post-headerDescription {
   margin-bottom: 10px;
   font-size: 15px;
+}
+
+.post-headerDescription p{
+  font-family: "chirp regular";
 }
 
 .post-body {
@@ -281,7 +300,6 @@ mat-icon{
 
 .widgets {
   flex: 0.3;
-  border-left: 1px solid #424242;
 }
 
 .widgets-input {
@@ -318,4 +336,11 @@ mat-icon{
 .widgets-widgetContainer h2 {
   font-size: 18px;
   font-weight: 800;
+}
+
+.loading-spinner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
 }
