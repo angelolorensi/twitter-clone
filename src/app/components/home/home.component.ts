@@ -16,6 +16,22 @@ export class HomeComponent implements OnInit {
   fyHeader: string = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
   followingHeader: string = '';
 
+  //Tweet Visibility variables
+  selectedTweetVisibilityOption: string = 'EVERYONE';
+  tweetVisibilityMatMenuOptions: string[] = [
+    'EVERYONE',
+    'CIRCLE'
+  ];
+
+  //Reply restriction variables
+  selectedReplyRestrictionOption: string = 'Everyone can reply'
+  replyRestrictionIcon: string = 'public'
+  replyRestrictionMatMenuOptions: string[] = [
+    'Everyone can reply',
+    'People you follow',
+    'Only people you mention'
+  ];
+
   //user data variables
   userId: number | null = null;
   token:string | null = '';
@@ -117,8 +133,8 @@ export class HomeComponent implements OnInit {
       replies: [],
       scheduled: false,
       scheduledDate: null,
-      audience: 'EVERYONE',
-      replyRestriction: 'EVERYONE',
+      audience: this.selectedTweetVisibilityOption,
+      replyRestriction: this.convertReplyRestriction(this.selectedReplyRestrictionOption)
     }
 
     const mediaFile = this.selectedImage;
@@ -169,6 +185,32 @@ export class HomeComponent implements OnInit {
     if (selectedFile) {
       console.log('Selected file:', selectedFile);
     }
+  }
+
+  selectTweetVisibility(option:string){
+    this.selectedTweetVisibilityOption = option;
+  }
+
+  selectReplyRestriction(replyRestrictionOption:string){
+    this.selectedReplyRestrictionOption = replyRestrictionOption;
+
+    if(this.selectedReplyRestrictionOption == 'Everyone can reply'){
+      this.replyRestrictionIcon = 'public'
+    } else if (this.selectedReplyRestrictionOption == 'People you follow'){
+      this.replyRestrictionIcon = 'group'
+    } else if (this.selectedReplyRestrictionOption == 'Only people you mention'){
+      this.replyRestrictionIcon = 'alternate_email'
+    }
+  }
+
+  convertReplyRestriction(replyRestriction: string):string{
+    if(replyRestriction == 'Everyone can reply'){
+      return 'EVERYONE'
+    } else if (replyRestriction == 'People you follow'){
+      return 'FOLLOW'
+    } else if (replyRestriction == 'Only people you mention'){
+      return 'MENTION'
+    } else return 'EVERYONE'
   }
 
 }

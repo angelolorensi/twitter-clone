@@ -131,6 +131,37 @@ mat-icon{
   flex-direction: column;
 }
 
+.tweetBox-tweetVisibility-btn{
+  width: 130px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5em;
+  background-color: black;
+  color: #1984cb;
+  font-family: "Chirp Bold";
+  border-radius: 20px;
+  font-size: 15px;
+  border: 1px solid white;
+}
+
+.tweetBox-tweetVisibility-btn-icon{
+  margin-bottom: 11px;
+}
+
+::ng-deep .tweetBox-tweetVisibility-menu{
+  background-color: #000;
+}
+
+::ng-deep .tweetBox-tweetVisibility-menu button{
+  color: #1984cb;
+}
+
+::ng-deep .tweetBox-tweetVisibility-menu button:hover{
+  background-color: #252525 !important;
+}
+
 .tweetbox-input {
   display: flex;
   padding: 20px;
@@ -146,11 +177,53 @@ mat-icon{
   border-radius: 20px;
   padding: 10px;
   background-color: #000;
-  border: 1px solid #252525;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.tweetbox-input textarea::placeholder{
+  font-family: 'Chirp Regular';
 }
 
 .tweetbox-input input:hover{
   background-color: #252525;
+}
+
+.tweetBox-replyRestriction{
+  margin-left: 4.4em;
+  border-bottom: 1px solid #252525;
+}
+
+.tweetBox-replyRestriction-btn{
+  width: 130px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5em;
+  background-color: black;
+  color: #1984cb;
+  font-family: "Chirp Bold";
+  border-radius: 20px;
+  font-size: 15px;
+  border: 1px solid white;
+}
+
+.tweetBox-replyRestriction-btn-icon{
+  font-size: 22px;
+}
+
+::ng-deep .tweetBox-replyRestriction-menu{
+  background-color: #000;
+}
+
+::ng-deep .tweetBox-replyRestriction-menu button{
+  color: #1984cb;
+}
+
+::ng-deep .tweetBox-replyRestriction-menu button:hover{
+  background-color: #252525 !important;
 }
 
 .tweetBox-tweetImg{
@@ -351,3 +424,5 @@ ul::-webkit-scrollbar{
   justify-content: center;
   padding: 2em;
 }
+
+

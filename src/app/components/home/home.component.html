@@ -53,11 +53,31 @@
       <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Following</h2>
     </div>
 
-    <div class="tweetBox">
+    <div class="tweetBox" appSlideTweetBox>
       <form>
+        <div class="tweetBox-tweetVisibility">
+          <button class="tweetBox-tweetVisibility-btn" mat-button [matMenuTriggerFor]="TweetVisibility">
+            {{selectedTweetVisibilityOption}}<mat-icon class="tweetBox-tweetVisibility-btn-icon">expand_more</mat-icon>
+          </button>
+          <mat-menu class="tweetBox-tweetVisibility-menu" #TweetVisibility="matMenu">
+            <button mat-menu-item *ngFor="let option of tweetVisibilityMatMenuOptions" (click)="selectTweetVisibility(option)">
+              {{option}}
+            </button>
+          </mat-menu>
+        </div>
         <div class="tweetbox-input" [formGroup]="tweetForm">
           <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
           <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
+        </div>
+        <div class="tweetBox-replyRestriction">
+          <button mat-button [matMenuTriggerFor]="ReplyRestriction">
+            <mat-icon class="tweetBox-replyRestriction-btn-icon">{{replyRestrictionIcon}}</mat-icon> {{selectedReplyRestrictionOption}}
+          </button>
+          <mat-menu class="tweetBox-replyRestriction-menu" #ReplyRestriction="matMenu">
+            <button mat-menu-item *ngFor="let replyRestrictionOption of replyRestrictionMatMenuOptions" (click)="selectReplyRestriction(replyRestrictionOption)">
+              {{replyRestrictionOption}}
+            </button>
+          </mat-menu>
         </div>
         <img class="tweetBox-tweetImg" [src]="imageUrl" *ngIf="showImage">
         <div class="tweetBox-options">

@@ -12,7 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from '@angular/material/menu';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateAccDialogComponent } from './components/create-acc-dialog/create-acc-dialog.component';
@@ -21,7 +23,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { TokenInterceptor } from './services/token-interceptor/token.interceptor';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SlideTweetBoxDirective } from './shared/slide-tweet-box.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     LoginDialogComponent,
     CreateAccDialogComponent,
     ForgotPasswordDialogComponent,
+    SlideTweetBoxDirective,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatMenuModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor,
