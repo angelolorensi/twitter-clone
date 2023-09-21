@@ -104,15 +104,37 @@
 
     <ul>
       <li *ngFor="let post of feedPosts">
+        <mat-card class="userInfoCard" [style.top]="cardPosition.top" [style.left]="cardPosition.left" *ngIf="isCardVisible" (mouseenter)="cancelHideUserInfo()" (mouseleave)="hideUserInfoCard(); leaveUserInfo()">
+            <div class="userInfoCard-top">
+              <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png">
+              <button mat-button>Follow</button>
+            </div>
+            <div class="userInfoCard-mid">
+              <h1>{{post.author.nickname}}</h1>
+              <h2>@{{post.author.username}}</h2>
+              <p>{{post.author.bio}}</p>
+            </div>
+            <div class="userInfoCard-bottom">
+              <div>
+                <b>{{userFollowingList.length}}</b>
+                <p>Following</p>
+              </div>
+              <div>
+                <b>{{userFollowersList.length}}</b>
+                <p>Followers</p>
+              </div>
+            </div>
+        </mat-card>
+
         <div class="post">
-          <div class="post-avatar">
+          <div class="post-avatar" (mouseenter)="showUserInfoCard($event)" (mouseleave)="hideUserInfoCard()">
             <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
           </div>
           <div class="post-body">
-            <div class="post-header">
+            <div class="post-header" (mouseenter)="showUserInfoCard($event)" (mouseleave)="hideUserInfoCard()">
               <div class="post-headerText">
                 <h3>
-                  {{post.author.username}}
+                  {{post.author.nickname}}
                   <span class="post-headerSpecial">
                     <span class="material-icons post-badge"> verified </span>@{{post.author.username}} · <span class="post-date">{{post.postedDate | date:'dd-MM-yyyy HH:mm:ss'}}</span>
                   </span>
@@ -137,7 +159,6 @@
         </div>
       </li>
     </ul>
-
   </div>
 
   <div class="widgets">

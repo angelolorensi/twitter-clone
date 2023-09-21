@@ -8,6 +8,7 @@ import { PasswordChange } from 'src/app/model/requests/PasswordChange';
 import { UpdatePhone } from 'src/app/model/requests/UpdatePhone';
 import { IdentifierResponse } from 'src/app/model/responses/IdentifierResponse';
 import { LoginResponse } from 'src/app/model/responses/LoginResponse';
+import { User } from 'src/app/model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +40,8 @@ export class AuthenticationService {
     return this.http.post<LoginResponse>('http://localhost:8000/auth/login', login);
   }
 
-  public userLoggedIn(): Observable<any> {
-    return this.http.get('http://localhost:8000/user/verify');
+  public userLoggedIn() {
+    return this.http.get<User>('http://localhost:8000/user/verify');
   }
 
   public getResetPasswdCode(email:string):Observable<any>{

@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/model/Post';
+import { User } from 'src/app/model/User';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -33,13 +35,10 @@ export class HomeComponent implements OnInit {
   ];
 
   //user data variables
-  userId: number | null = null;
+  user?: User;
   token:string | null = '';
-  username:string | null  = '';
-  nickname:string | null = '';
-  email:string | null = '';
-  dob:string | null = '';
-  phone:string | null = '';
+  userFollowingList: User[] = [];
+  userFollowersList: User[] = [];
 
   //new tweet image variables
   selectedImage: File | null = null;
@@ -51,12 +50,16 @@ export class HomeComponent implements OnInit {
 
   //posts variables
   feedPosts?: any[];
+  isCardVisible = false;
+  cardPosition:any = { top: 0, left: 0 };
+  isMouseInCard = false;
 
   constructor(
     private router:Router,
     private authService:AuthenticationService,
     private fb:FormBuilder,
-    private postService: PostService
+    private postService: PostService,
+    private userService: UserService
   ) {
     this.tweetForm = fb.group({
       tweetContent: ['']
@@ -67,6 +70,31 @@ export class HomeComponent implements OnInit {
     //check if logged in
     this.loadData();
     this.loadPosts();
+  }
+
+  showUserInfoCard(event: MouseEvent){
+    this.cardPosition = {
+      top: event.clientY + 10 + 'px',
+      left: event.clientX + 'px',
+    };
+
+    this.isCardVisible = true;
+  }
+
+  hideUserInfoCard(){
+    setTimeout(() => {
+      if (!this.isMouseInCard) {
+        this.isCardVisible = false;
+      }
+    }, 200);
+  }
+
+  cancelHideUserInfo() {
+    this.isMouseInCard = true;
+  }
+
+  leaveUserInfo() {
+    this.isMouseInCard = false;
   }
 
   getSelectedHeader(header: string){
@@ -84,34 +112,30 @@ export class HomeComponent implements OnInit {
     //check if logged in
     this.token = localStorage.getItem('token');
     this.authService.userLoggedIn().subscribe(
-      (data) =>{
-        localStorage.setItem('id', data.id);
-        localStorage.setItem('username', data.username);
-        localStorage.setItem('nickname', data.nickname);
-        localStorage.setItem('email', data.email);
-        localStorage.setItem('dob', data.dateOfBirth);
-        localStorage.setItem('profilePicture', data.profilePicture);
-        localStorage.setItem('bannerPicture', data.bannerPicture);
-        localStorage.setItem('phone', data.phone);
-
-        //convert id to number
-        const userId: string | null = localStorage.getItem('id');
-        if(userId !== null){
-          this.userId = parseFloat(userId);
-        }
-
-        //set data to page
-        this.username = localStorage.getItem('username');
-        this.nickname = localStorage.getItem('nickname');
-        if(this.nickname == 'null'){
-          this.nickname = this.username;
-        }
-        this.email = localStorage.getItem('email');
-        this.phone = localStorage.getItem('phone');
+      (data) => {
+        this.user = data;
+        this.getFollowingList(data.username);
+        this.getFollowersList(data.username);
       },
       (error) => {
         this.router.navigateByUrl('/login');
         alert("error:" + error.error)
+      }
+    );
+  }
+
+  getFollowingList(username: string){
+    this.userService.getUserFollowing(username).subscribe(
+      data => {
+        this.userFollowingList = data;
+      }
+    );
+  }
+
+  getFollowersList(username: string){
+    this.userService.getUserFollowers(username).subscribe(
+      data => {
+        this.userFollowersList = data;
       }
     );
   }
@@ -128,7 +152,7 @@ export class HomeComponent implements OnInit {
     const tweetData = {
       content: this.tweetForm.value.tweetContent,
       author: {
-        id: this.userId
+        id: this.user?.id
       },
       replies: [],
       scheduled: false,
