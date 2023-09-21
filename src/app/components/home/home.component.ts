@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit {
   loadPosts(){
     this.postService.getAllPosts().subscribe(
       data => {
-        this.feedPosts = data;
+        this.feedPosts = data.reverse();
       }
     );
   }
@@ -144,6 +144,7 @@ export class HomeComponent implements OnInit {
         data => {
           console.log("media post saved");
           this.showImage = false;
+          this.selectedImage = null;
           this.tweetForm.get('tweetContent')?.setValue('')
           this.loadPosts();
         },

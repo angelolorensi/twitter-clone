@@ -353,19 +353,28 @@ ul::-webkit-scrollbar{
   color: gray;
 }
 
+.post-date{
+  font-weight: 400;
+}
+
+.post-headerText{
+  display: flex;
+  align-items: center;
+}
+
 .post-headerText h3 {
   font-size: 17px;
   margin-bottom: 5px;
   color: #d1d1d1;
-  font-family: "chirp regular";
+  font-family: "Chirp Regular";
 }
 
-.post-headerDescription {
+.post-content {
   margin-bottom: 10px;
   font-size: 15px;
 }
 
-.post-headerDescription p{
+.post-content p{
   font-family: "chirp regular";
 }
 

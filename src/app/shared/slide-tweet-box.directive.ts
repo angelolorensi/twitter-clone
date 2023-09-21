@@ -11,7 +11,7 @@ export class SlideTweetBoxDirective {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: Event) {
-    const scrollPosition = window.scrollY || window.pageYOffset;
+    const scrollPosition = window.scrollY || window.scrollY;
 
     // Add or remove the 'hidden' class based on the scroll position
     if (scrollPosition > 100 && !this.isHidden) {
