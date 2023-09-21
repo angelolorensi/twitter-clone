@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/User';
@@ -10,10 +11,10 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   public getUserFollowers(username: string | undefined){
-    return this.http.get<User[]>('http://localhost:8000/user/followers/' + username);
+    return this.http.get<User[]>(environment.apiAdress + '/user/followers/' + username);
   }
 
   public getUserFollowing(username: string | undefined){
-    return this.http.get<User[]>('http://localhost:8000/user/following/' + username);
+    return this.http.get<User[]>(environment.apiAdress + '/user/following/' + username);
   }
 }

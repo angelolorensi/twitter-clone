@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,14 +16,14 @@ export class PostService {
     formData.append('post', JSON.stringify(postData));
     formData.append('media', mediaFile);
 
-    return this.http.post<any>('http://localhost:8000/posts/media', formData);
+    return this.http.post<any>(environment.apiAdress + '/posts/media', formData);
   }
 
   public createPost(postData: any){
-    return this.http.post<any>('http://localhost:8000/posts/', postData);
+    return this.http.post<any>(environment.apiAdress + '/posts/', postData);
   }
 
   public getAllPosts(){
-    return this.http.get<any>('http://localhost:8000/posts/');
+    return this.http.get<any>(environment.apiAdress + '/posts/');
   }
 }
