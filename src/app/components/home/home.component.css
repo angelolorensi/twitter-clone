@@ -419,6 +419,7 @@ ul::-webkit-scrollbar{
 .post-footer-icon{
   font-size: 1.8em;
   cursor: pointer;
+  color: #565656;
 }
 
 .post-footer-icon:hover{

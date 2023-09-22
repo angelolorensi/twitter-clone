@@ -17,4 +17,16 @@ export class UserService {
   public getUserFollowing(username: string | undefined){
     return this.http.get<User[]>(environment.apiAdress + '/user/following/' + username);
   }
+
+  public changeProfilePicture(image: File){
+    return this.http.post<User>(environment.apiAdress + '/user/pfp', image);
+  }
+
+  public changeBannerPicture(image: File){
+    return this.http.post<User>(environment.apiAdress + '/user/banner', image);
+  }
+
+  public downloadPicture(imageName: string){
+    return this.http.get(environment.apiAdress + '/images/' + imageName);
+  }
 }

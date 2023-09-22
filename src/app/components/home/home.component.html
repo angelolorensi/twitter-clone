@@ -104,31 +104,32 @@
 
     <ul>
       <li *ngFor="let post of feedPosts">
-        <mat-card class="userInfoCard" [style.top]="cardPosition.top" [style.left]="cardPosition.left" *ngIf="isCardVisible" (mouseenter)="cancelHideUserInfo()" (mouseleave)="hideUserInfoCard(); leaveUserInfo()">
-            <div class="userInfoCard-top">
-              <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png">
-              <button mat-button>Follow</button>
-            </div>
-            <div class="userInfoCard-mid">
-              <h1>{{post.author.nickname}}</h1>
-              <h2>@{{post.author.username}}</h2>
-              <p>{{post.author.bio}}</p>
-            </div>
-            <div class="userInfoCard-bottom">
-              <div>
-                <b>{{userFollowingList.length}}</b>
-                <p>Following</p>
-              </div>
-              <div>
-                <b>{{userFollowersList.length}}</b>
-                <p>Followers</p>
-              </div>
-            </div>
-        </mat-card>
-
         <div class="post">
+          <mat-card class="userInfoCard" [style.top]="cardPosition.top" [style.left]="cardPosition.left" *ngIf="isCardVisible" (mouseenter)="cancelHideUserInfo()" (mouseleave)="hideUserInfoCard(); leaveUserInfo()">
+              <div class="userInfoCard-top">
+                <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
+                <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
+                <button mat-button>Follow</button>
+              </div>
+              <div class="userInfoCard-mid">
+                <h1>{{post.author.nickname}}</h1>
+                <h2>@{{post.author.username}}</h2>
+                <p>{{post.author.bio}}</p>
+              </div>
+              <div class="userInfoCard-bottom">
+                <div>
+                  <b>{{post.author.followingCount.length}}</b>
+                  <p>Following</p>
+                </div>
+                <div>
+                  <b>{{post.author.followersCount.length}}</b>
+                  <p>Followers</p>
+                </div>
+              </div>
+          </mat-card>
           <div class="post-avatar" (mouseenter)="showUserInfoCard($event)" (mouseleave)="hideUserInfoCard()">
-            <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
+            <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
+            <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
           </div>
           <div class="post-body">
             <div class="post-header" (mouseenter)="showUserInfoCard($event)" (mouseleave)="hideUserInfoCard()">

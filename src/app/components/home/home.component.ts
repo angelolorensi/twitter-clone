@@ -114,8 +114,6 @@ export class HomeComponent implements OnInit {
     this.authService.userLoggedIn().subscribe(
       (data) => {
         this.user = data;
-        this.getFollowingList(data.username);
-        this.getFollowersList(data.username);
       },
       (error) => {
         this.router.navigateByUrl('/login');
@@ -124,26 +122,33 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getFollowingList(username: string){
-    this.userService.getUserFollowing(username).subscribe(
-      data => {
-        this.userFollowingList = data;
-      }
-    );
-  }
-
-  getFollowersList(username: string){
-    this.userService.getUserFollowers(username).subscribe(
-      data => {
-        this.userFollowersList = data;
-      }
-    );
-  }
-
   loadPosts(){
+    //load all posts
     this.postService.getAllPosts().subscribe(
       data => {
+        //Save the post array and invert order of posts so that the newest shows on top
         this.feedPosts = data.reverse();
+
+        //Iterate through the post array
+        this.feedPosts?.forEach(
+          post =>{
+
+            //Set the post author followings array
+            this.userService.getUserFollowing(post.author.username).subscribe(
+              following => {
+                post.author.followingCount = following;
+              }
+            )
+
+            //Set the post author followers array
+            this.userService.getUserFollowers(post.author.username).subscribe(
+              followers => {
+                post.author.followersCount = followers;
+              }
+            )
+          }
+
+        )
       }
     );
   }

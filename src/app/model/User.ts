@@ -4,11 +4,22 @@ export interface User{
   username: string;
   bio: string;
   nickname: string;
-  profilePicture: string;
-  bannerPicture: string;
+  profilePicture: {
+    imageId: number,
+    imageName:string,
+    imageType: string,
+    imageUrl: string
+  };
+  bannerPicture:  {
+    imageId: number,
+    imageName:string,
+    imageType: string,
+    imageUrl: string
+  };
   email: string;
   phone: string;
   dateOfBirth: Date;
   enabled: boolean;
-
+  followersCount:number;
+  followingCount:number;
 }
