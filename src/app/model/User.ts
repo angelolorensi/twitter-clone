@@ -20,6 +20,7 @@ export interface User{
   phone: string;
   dateOfBirth: Date;
   enabled: boolean;
+  verified: boolean;
   followersCount:number;
   followingCount:number;
 }

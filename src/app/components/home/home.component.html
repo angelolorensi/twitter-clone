@@ -53,59 +53,53 @@
       <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Following</h2>
     </div>
 
-    <div class="tweetBox" appSlideTweetBox>
-      <form>
-        <div class="tweetBox-tweetVisibility">
-          <button class="tweetBox-tweetVisibility-btn" mat-button [matMenuTriggerFor]="TweetVisibility">
-            {{selectedTweetVisibilityOption}}<mat-icon class="tweetBox-tweetVisibility-btn-icon">expand_more</mat-icon>
-          </button>
-          <mat-menu class="tweetBox-tweetVisibility-menu" #TweetVisibility="matMenu">
-            <button mat-menu-item *ngFor="let option of tweetVisibilityMatMenuOptions" (click)="selectTweetVisibility(option)">
-              {{option}}
-            </button>
-          </mat-menu>
-        </div>
-        <div class="tweetbox-input" [formGroup]="tweetForm">
-          <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
-          <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
-        </div>
-        <div class="tweetBox-replyRestriction">
-          <button mat-button [matMenuTriggerFor]="ReplyRestriction">
-            <mat-icon class="tweetBox-replyRestriction-btn-icon">{{replyRestrictionIcon}}</mat-icon> {{selectedReplyRestrictionOption}}
-          </button>
-          <mat-menu class="tweetBox-replyRestriction-menu" #ReplyRestriction="matMenu">
-            <button mat-menu-item *ngFor="let replyRestrictionOption of replyRestrictionMatMenuOptions" (click)="selectReplyRestriction(replyRestrictionOption)">
-              {{replyRestrictionOption}}
-            </button>
-          </mat-menu>
-        </div>
-        <img class="tweetBox-tweetImg" [src]="imageUrl" *ngIf="showImage">
-        <div class="tweetBox-options">
-          <div class="tweetBox-options-selection">
-            <mat-icon title="Image" (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
-            <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
-            <mat-icon (click)="gifInput.click()" color="primary" class="tweetBox-icons">gif_box</mat-icon>
-            <input title="Gif" #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
-            <mat-icon title="Poll" color="primary" class="tweetBox-icons">ballot</mat-icon>
-            <mat-icon title="Emoji" color="primary" class="tweetBox-icons">mood</mat-icon>
-            <mat-icon title="Schedule" color="primary" class="tweetBox-icons">calendar_month</mat-icon>
-            <mat-icon title="Location" color="primary" class="tweetBox-icons">location_on</mat-icon>
-          </div>
-          <button class="tweetBox-btn" (click)="submitTweet()">Post</button>
-        </div>
-      </form>
-    </div>
-
-    <ng-template #loading>
-      <div class="loading-spinner">
-        <mat-spinner></mat-spinner>
-      </div>
-    </ng-template>
-
     <ul>
+      <div class="tweetBox">
+        <form>
+          <div class="tweetBox-tweetVisibility">
+            <button class="tweetBox-tweetVisibility-btn" mat-button [matMenuTriggerFor]="TweetVisibility">
+              {{selectedTweetVisibilityOption}}<mat-icon class="tweetBox-tweetVisibility-btn-icon">expand_more</mat-icon>
+            </button>
+            <mat-menu class="tweetBox-tweetVisibility-menu" #TweetVisibility="matMenu">
+              <button mat-menu-item *ngFor="let option of tweetVisibilityMatMenuOptions" (click)="selectTweetVisibility(option)">
+                {{option}}
+              </button>
+            </mat-menu>
+          </div>
+          <div class="tweetbox-input" [formGroup]="tweetForm">
+            <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
+            <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
+          </div>
+          <div class="tweetBox-replyRestriction">
+            <button mat-button [matMenuTriggerFor]="ReplyRestriction">
+              <mat-icon class="tweetBox-replyRestriction-btn-icon">{{replyRestrictionIcon}}</mat-icon> {{selectedReplyRestrictionOption}}
+            </button>
+            <mat-menu class="tweetBox-replyRestriction-menu" #ReplyRestriction="matMenu">
+              <button mat-menu-item *ngFor="let replyRestrictionOption of replyRestrictionMatMenuOptions" (click)="selectReplyRestriction(replyRestrictionOption)">
+                {{replyRestrictionOption}}
+              </button>
+            </mat-menu>
+          </div>
+          <img class="tweetBox-tweetImg" [src]="imageUrl" *ngIf="showImage">
+          <div class="tweetBox-options">
+            <div class="tweetBox-options-selection">
+              <mat-icon title="Image" (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
+              <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
+              <mat-icon (click)="gifInput.click()" color="primary" class="tweetBox-icons">gif_box</mat-icon>
+              <input title="Gif" #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
+              <mat-icon title="Poll" color="primary" class="tweetBox-icons">ballot</mat-icon>
+              <mat-icon title="Emoji" color="primary" class="tweetBox-icons">mood</mat-icon>
+              <mat-icon title="Schedule" color="primary" class="tweetBox-icons">calendar_month</mat-icon>
+              <mat-icon title="Location" color="primary" class="tweetBox-icons">location_on</mat-icon>
+            </div>
+            <button class="tweetBox-btn" (click)="submitTweet()">Post</button>
+          </div>
+        </form>
+      </div>
+
       <li *ngFor="let post of feedPosts">
         <div class="post">
-          <mat-card class="userInfoCard" [style.top]="cardPosition.top" [style.left]="cardPosition.left" *ngIf="isCardVisible" (mouseenter)="cancelHideUserInfo()" (mouseleave)="hideUserInfoCard(); leaveUserInfo()">
+          <mat-card class="userInfoCard" [style.top]="cardPosition.top" [style.left]="cardPosition.left" *ngIf="currentHoveredPost === post" (mouseenter)="cancelHideUserInfo()" (mouseleave)="hideUserInfoCard(); leaveUserInfo()">
               <div class="userInfoCard-top">
                 <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
                 <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
@@ -127,17 +121,17 @@
                 </div>
               </div>
           </mat-card>
-          <div class="post-avatar" (mouseenter)="showUserInfoCard($event)" (mouseleave)="hideUserInfoCard()">
+          <div class="post-avatar" (mouseenter)="showUserInfoCard(post, $event)" (mouseleave)="hideUserInfoCard()">
             <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
             <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
           </div>
           <div class="post-body">
-            <div class="post-header" (mouseenter)="showUserInfoCard($event)" (mouseleave)="hideUserInfoCard()">
+            <div class="post-header" (mouseenter)="showUserInfoCard(post, $event)" (mouseleave)="hideUserInfoCard()">
               <div class="post-headerText">
                 <h3>
                   {{post.author.nickname}}
                   <span class="post-headerSpecial">
-                    <span class="material-icons post-badge"> verified </span>@{{post.author.username}} · <span class="post-date">{{post.postedDate | date:'dd-MM-yyyy HH:mm:ss'}}</span>
+                    <span class="material-icons post-badge" *ngIf="post.author.verified"> verified </span>@{{post.author.username}} · <span class="post-date">{{post.postedDate | date:'dd-MM-yyyy HH:mm:ss'}}</span>
                   </span>
                 </h3>
               </div>

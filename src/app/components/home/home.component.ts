@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
   feedPosts?: any[];
   isCardVisible = false;
   cardPosition:any = { top: 0, left: 0 };
+  currentHoveredPost: any;
   isMouseInCard = false;
 
   constructor(
@@ -72,27 +73,30 @@ export class HomeComponent implements OnInit {
     this.loadPosts();
   }
 
-  showUserInfoCard(event: MouseEvent){
+  //Displays the user info card when mouse hovered over post
+  showUserInfoCard(post: any, event: MouseEvent) {
+    this.currentHoveredPost = post;
     this.cardPosition = {
-      top: event.clientY + 10 + 'px',
-      left: event.clientX + 'px',
+      top: `${event.clientY}px`,
+      left: `${event.clientX}px`,
     };
-
-    this.isCardVisible = true;
   }
 
+  //hides the user info card when mouse leaves the card
   hideUserInfoCard(){
     setTimeout(() => {
       if (!this.isMouseInCard) {
-        this.isCardVisible = false;
+        this.currentHoveredPost = null;
       }
     }, 200);
   }
 
+  //locks the hideUserInfoCard, so that the user can use the info card
   cancelHideUserInfo() {
     this.isMouseInCard = true;
   }
 
+  //unlock the hideUserInfoCard when mouse leaves the card
   leaveUserInfo() {
     this.isMouseInCard = false;
   }
