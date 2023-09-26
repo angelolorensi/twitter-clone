@@ -1,166 +1,27 @@
 <body>
-  <div class="sidebar">
-    <img class="sidebar-logo" routerLink="/home" src="assets/img/twitter-logo.png"/>
-    <div class="sidebar-options">
-      <mat-icon>home</mat-icon>
-      <h2 class="sidebar-options-text">Página Inicial</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>search</mat-icon>
-      <h2 class="sidebar-options-text">Explorar</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>notifications</mat-icon>
-      <h2 class="sidebar-options-text">Notificações</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>mail</mat-icon>
-      <h2 class="sidebar-options-text">Mensagens</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>list_alt</mat-icon>
-      <h2 class="sidebar-options-text">Listas</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>bookmarks</mat-icon>
-      <h2 class="sidebar-options-text">Itens Salvos</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>check_circle</mat-icon>
-      <h2 class="sidebar-options-text">Premium</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>person_outline</mat-icon>
-      <h2 class="sidebar-options-text">Perfil</h2>
-    </div>
-    <div class="sidebar-options">
-      <mat-icon>more</mat-icon>
-      <h2 class="sidebar-options-text">Mais</h2>
-    </div>
-    <button class="sidebar-post-btn">Post</button>
-  </div>
+
+  <app-sidebar class="sidebar" [user]="user"></app-sidebar>
+
   <div class="feed">
 
     <div class="feed-header">
       <h2>Home</h2>
     </div>
+
     <div class="feed-subheader">
       <h2 [style]="fyHeader" (click)="getSelectedHeader('For You')">For you</h2>
       <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Following</h2>
     </div>
 
     <ul>
-      <div class="tweetBox">
-        <form>
-          <div class="tweetBox-tweetVisibility">
-            <button class="tweetBox-tweetVisibility-btn" mat-button [matMenuTriggerFor]="TweetVisibility">
-              {{selectedTweetVisibilityOption}}<mat-icon class="tweetBox-tweetVisibility-btn-icon">expand_more</mat-icon>
-            </button>
-            <mat-menu class="tweetBox-tweetVisibility-menu" #TweetVisibility="matMenu">
-              <button mat-menu-item *ngFor="let option of tweetVisibilityMatMenuOptions" (click)="selectTweetVisibility(option)">
-                {{option}}
-              </button>
-            </mat-menu>
-          </div>
-          <div class="tweetbox-input" [formGroup]="tweetForm">
-            <img *ngIf="user?.profilePicture?.imageUrl" [src]="user?.profilePicture?.imageUrl" alt="User Avatar" />
-            <img *ngIf="!user?.profilePicture?.imageUrl" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
-            <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
-          </div>
-          <div class="tweetBox-replyRestriction">
-            <button mat-button [matMenuTriggerFor]="ReplyRestriction">
-              <mat-icon class="tweetBox-replyRestriction-btn-icon">{{replyRestrictionIcon}}</mat-icon> {{selectedReplyRestrictionOption}}
-            </button>
-            <mat-menu class="tweetBox-replyRestriction-menu" #ReplyRestriction="matMenu">
-              <button mat-menu-item *ngFor="let replyRestrictionOption of replyRestrictionMatMenuOptions" (click)="selectReplyRestriction(replyRestrictionOption)">
-                {{replyRestrictionOption}}
-              </button>
-            </mat-menu>
-          </div>
-          <img class="tweetBox-tweetImg" [src]="imageUrl" *ngIf="showImage">
-          <div class="tweetBox-options">
-            <div class="tweetBox-options-selection">
-              <mat-icon title="Image" (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
-              <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
-              <mat-icon (click)="gifInput.click()" color="primary" class="tweetBox-icons">gif_box</mat-icon>
-              <input title="Gif" #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
-              <mat-icon title="Poll" color="primary" class="tweetBox-icons">ballot</mat-icon>
-              <mat-icon title="Emoji" color="primary" class="tweetBox-icons">mood</mat-icon>
-              <mat-icon title="Schedule" color="primary" class="tweetBox-icons">calendar_month</mat-icon>
-              <mat-icon title="Location" color="primary" class="tweetBox-icons">location_on</mat-icon>
-            </div>
-            <button class="tweetBox-btn" (click)="submitTweet()">Post</button>
-          </div>
-        </form>
-      </div>
-
-      <li *ngFor="let post of feedPosts">
-        <div class="post">
-          <mat-card class="userInfoCard" [style.top]="cardPosition.top" [style.left]="cardPosition.left" *ngIf="currentHoveredPost === post" (mouseenter)="cancelHideUserInfo()" (mouseleave)="hideUserInfoCard(); leaveUserInfo()">
-              <div class="userInfoCard-top">
-                <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
-                <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
-                <button mat-button (click)="follow(post.author.username)">Follow</button>
-              </div>
-              <div class="userInfoCard-mid">
-                <h1>{{post.author.name}}</h1>
-                <h2>@{{post.author.username}}</h2>
-                <p>{{post.author.bio}}</p>
-              </div>
-              <div class="userInfoCard-bottom">
-                <div>
-                  <b>{{post.author.followingCount.length}}</b>
-                  <p>Following</p>
-                </div>
-                <div>
-                  <b>{{post.author.followersCount.length}}</b>
-                  <p>Followers</p>
-                </div>
-              </div>
-          </mat-card>
-          <div class="post-avatar" (mouseenter)="showUserInfoCard(post, $event)" (mouseleave)="hideUserInfoCard()">
-            <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
-            <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
-          </div>
-          <div class="post-body">
-            <div class="post-header" (mouseenter)="showUserInfoCard(post, $event)" (mouseleave)="hideUserInfoCard()">
-              <div class="post-headerText">
-                <h3>
-                  {{post.author.name}}
-                  <span class="post-headerSpecial">
-                    <span class="material-icons post-badge" *ngIf="post.author.verified"> verified </span>@{{post.author.username}} · <span class="post-date">{{post.postedDate | date:'dd-MM-yyyy HH:mm:ss'}}</span>
-                  </span>
-                </h3>
-              </div>
-            </div>
-            <div class="post-content">
-              <p>{{post.content}}</p>
-            </div>
-            <ng-container *ngIf="post.images.length > 0">
-              <div *ngFor="let image of post.images">
-                <img [src]="image.imageUrl"/>
-              </div>
-            </ng-container>
-            <div class="post-footer">
-              <mat-icon title="Reply" class="post-footer-icon"> chat_bubble </mat-icon>
-              <mat-icon title="Retweet" class="post-footer-icon"> repeat </mat-icon>
-              <mat-icon title="Favorite" class="post-footer-icon"> favorite_border </mat-icon>
-              <mat-icon title="Download" class="post-footer-icon"> publish </mat-icon>
-            </div>
-          </div>
-        </div>
-      </li>
+      <app-tweetbox (callLoadPosts)="loadPosts()" [user]="user"></app-tweetbox>
+      <app-post [feedPosts]="feedPosts" (callLoadPosts)="loadPosts()"></app-post>
     </ul>
+
   </div>
 
   <div class="widgets">
-    <div class="widgets-input">
-      <span class="material-icons widgets-searchIcon"> search </span>
-      <input class="widgets-input-search" type="text" placeholder="Search Twitter" />
-    </div>
-    <div class="widgets-widgetContainer">
-      <h2>What's happening?</h2>
-    </div>
+    <app-widgets></app-widgets>
   </div>
 
 </body>

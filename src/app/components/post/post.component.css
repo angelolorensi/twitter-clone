@@ -1,0 +1,181 @@
+.userInfoCard{
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 300px;
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  animation: fadeIn 0.3s;
+  -webkit-box-shadow: 1px 1px 5px 4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 1px 5px 4px rgba(0,0,0,0.75);
+  box-shadow: 1px 1px 5px 4px rgba(147, 147, 147, 0.5);
+}
+
+.userInfoCard-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userInfoCard-top img{
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.userInfoCard-top button{
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  font-family: "Chirp Bold";
+  color: black;
+  height: 40px;
+}
+
+.userInfoCard-mid{
+  padding: 0;
+  margin: 0;
+}
+
+.userInfoCard-mid h1{
+  padding: 0;
+  margin: 0;
+  font-family: "Chirp Bold";
+  font-size: 22px;
+}
+
+.userInfoCard-mid h2{
+  padding: 0;
+  margin: 0;
+  font-family: "Chirp Regular";
+  color: #565656;
+  font-size: 15px;
+}
+
+.userInfoCard-mid p{
+  padding: 0;
+  margin-top: 10px;
+  font-family: "Chirp Regular";
+  font-size: 18px;
+}
+
+.userInfoCard-bottom{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.userInfoCard-bottom div{
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+
+.userInfoCard-bottom div p{
+  font-family: "chirp regular";
+  color: #565656;
+  font-size: 15px;
+}
+
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.post-avatar img {
+  border-radius: 50%;
+  height: 40px;
+  cursor: pointer;
+}
+
+.post-avatar img:hover {
+  opacity: 0.8;
+}
+
+.post {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #252525;
+  padding-bottom: 10px;
+  border-right: 1px solid #424242;
+  border-left: 1px solid #424242;
+}
+
+.post-body img {
+  width: 450px;
+  object-fit: contain;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.post-footer {
+  display: flex;
+  width: 450px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.post-footer-icon{
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #565656;
+}
+
+.post-footer-icon:hover{
+  color: #1672b0;
+}
+
+.post-footer-icon:active{
+  transform: scale(1.2);
+}
+
+.post-badge {
+  font-size: 14px !important;
+  color: #1672b0;
+  margin-right: 5px;
+}
+
+.post-headerSpecial {
+  font-family: "Chirp regular";
+  font-weight: 500;
+  font-size: 15px;
+  color: gray;
+}
+
+.post-date{
+  font-weight: 400;
+}
+
+.post-headerText{
+  display: flex;
+  align-items: center;
+}
+
+.post-headerText h3 {
+  font-size: 17px;
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-family: "Chirp Bold";
+}
+
+.post-content {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.post-content p{
+  font-family: "chirp regular";
+}
+
+.post-body {
+  flex: 1;
+  padding: 10px;
+}
+
+.post-avatar {
+  padding: 20px;
+}

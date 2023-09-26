@@ -1,0 +1,58 @@
+mat-icon{
+  font-size: 2.2em;
+}
+
+.sidebar-logo{
+  height: 50px;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.sidebar-options{
+  display: flex;
+  gap: 2em;
+  padding: 12px;
+  padding-bottom: 0;
+}
+
+.sidebar-options:hover{
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  background-color: #252525;
+  border-radius: 2em;
+}
+
+.sidebar-options-text{
+  font-size: 2em;
+  font-family: "chirp regular";
+}
+
+.sidebar-post-btn{
+  width: 100%;
+  color: #ffffff;
+  background-color: #1984cb;
+  font-family: "chirp bold";
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 2em;
+}
+
+.sidebar-post-btn:hover {
+  background-color: #1672b0;
+}
+
+.sidebar-post-btn:active {
+  transform: scale(0.95);
+}

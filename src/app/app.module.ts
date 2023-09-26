@@ -26,6 +26,11 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { TokenInterceptor } from './services/token-interceptor/token.interceptor';
 import { FirstLoginDialogComponent } from './components/first-login-dialog/first-login-dialog.component';
 import { NoSpaceDirective } from './shared/no-space/no-space.directive';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TweetboxComponent } from './components/tweetbox/tweetbox.component';
+import { PostComponent } from './components/post/post.component';
+import { WidgetsComponent } from './components/widgets/widgets.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,11 @@ import { NoSpaceDirective } from './shared/no-space/no-space.directive';
     ForgotPasswordDialogComponent,
     FirstLoginDialogComponent,
     NoSpaceDirective,
+    ProfilePageComponent,
+    SidebarComponent,
+    TweetboxComponent,
+    PostComponent,
+    WidgetsComponent,
   ],
   imports: [
     BrowserModule,
