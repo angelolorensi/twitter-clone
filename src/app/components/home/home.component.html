@@ -67,7 +67,8 @@
             </mat-menu>
           </div>
           <div class="tweetbox-input" [formGroup]="tweetForm">
-            <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"/>
+            <img *ngIf="user?.profilePicture?.imageUrl" [src]="user?.profilePicture?.imageUrl" alt="User Avatar" />
+            <img *ngIf="!user?.profilePicture?.imageUrl" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
             <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
           </div>
           <div class="tweetBox-replyRestriction">
@@ -106,7 +107,7 @@
                 <button mat-button>Follow</button>
               </div>
               <div class="userInfoCard-mid">
-                <h1>{{post.author.nickname}}</h1>
+                <h1>{{post.author.name}}</h1>
                 <h2>@{{post.author.username}}</h2>
                 <p>{{post.author.bio}}</p>
               </div>
@@ -129,7 +130,7 @@
             <div class="post-header" (mouseenter)="showUserInfoCard(post, $event)" (mouseleave)="hideUserInfoCard()">
               <div class="post-headerText">
                 <h3>
-                  {{post.author.nickname}}
+                  {{post.author.name}}
                   <span class="post-headerSpecial">
                     <span class="material-icons post-badge" *ngIf="post.author.verified"> verified </span>@{{post.author.username}} · <span class="post-date">{{post.postedDate | date:'dd-MM-yyyy HH:mm:ss'}}</span>
                   </span>

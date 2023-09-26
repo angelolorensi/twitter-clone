@@ -3,7 +3,7 @@ export interface User{
   id:number;
   username: string;
   bio: string;
-  nickname: string;
+  name: string;
   profilePicture: {
     imageId: number,
     imageName:string,
