@@ -1,13 +1,6 @@
-import { RegistrationUser } from 'src/app/model/RegistrationUser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { CodeVerification } from 'src/app/model/requests/CodeVerification';
-import { Login } from 'src/app/model/requests/Login';
-import { PasswordChange } from 'src/app/model/requests/PasswordChange';
-import { UpdatePhone } from 'src/app/model/requests/UpdatePhone';
-import { IdentifierResponse } from 'src/app/model/responses/IdentifierResponse';
-import { LoginResponse } from 'src/app/model/responses/LoginResponse';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/model/User';
 import { environment } from 'src/environments/environment';
 
@@ -17,28 +10,28 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
-  public registerUser(user: RegistrationUser): Observable<User> {
+  public registerUser(user: { name: string, email: string, dob: string }){
     return this.http.post<User>(environment.apiAdress + '/auth/register', user);
   }
 
-  public updateUserPhone(updatePhone: UpdatePhone): Observable<UpdatePhone> {
-    return this.http.put<UpdatePhone>(environment.apiAdress + '/auth/update/phone',updatePhone);
+  public updateUserPhone(updatePhone: {username:string, phone:string}){
+    return this.http.put(environment.apiAdress + '/auth/update/phone',updatePhone);
   }
 
-  public sendVerificationEmail(updatePhone: UpdatePhone): Observable<UpdatePhone> {
-    return this.http.post<UpdatePhone>(environment.apiAdress + '/auth/email/code',updatePhone);
+  public sendVerificationEmail(verificationEmail: {username:string, phone:string}){
+    return this.http.post(environment.apiAdress + '/auth/email/code',verificationEmail);
   }
 
-  public verifyCode(codeVerification: CodeVerification): Observable<CodeVerification>{
-    return this.http.post<CodeVerification>(environment.apiAdress + '/auth/email/verify',codeVerification);
+  public verifyCode(codeVerification: {code: string, username:string}){
+    return this.http.post(environment.apiAdress + '/auth/email/verify',codeVerification);
   }
 
-  public changePassword(passwordChange: PasswordChange): Observable<PasswordChange> {
-    return this.http.put<PasswordChange>(environment.apiAdress + '/auth/update/password',passwordChange);
+  public changePassword(passwordChange: {username:string, password: string}){
+    return this.http.put(environment.apiAdress + '/auth/update/password',passwordChange);
   }
 
-  public login(login: Login): Observable<any> {
-    return this.http.post<LoginResponse>(environment.apiAdress + '/auth/login', login);
+  public login(login: {email: string, password: string}){
+    return this.http.post<{token: string}>(environment.apiAdress + '/auth/login', login);
   }
 
   public userLoggedIn() {

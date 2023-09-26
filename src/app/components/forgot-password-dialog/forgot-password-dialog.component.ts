@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PasswordChange } from 'src/app/model/requests/PasswordChange';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -83,11 +82,11 @@ export class ForgotPasswordDialogComponent implements OnInit {
     if (!this.newPasswdForm.valid) {
       return;
     }
-    const data = new PasswordChange(
-      this.resetPasswdForm.value.username,
-      this.newPasswdForm.value.newPassword
-    );
-    this.authService.changePassword(data).subscribe(
+    const passwordChange = {
+      username: this.resetPasswdForm.value.username,
+      password: this.newPasswdForm.value.newPassword
+    };
+    this.authService.changePassword(passwordChange).subscribe(
       (data) => {
         alert('Senha alterada com sucesso!');
         this.dialogRef.close();

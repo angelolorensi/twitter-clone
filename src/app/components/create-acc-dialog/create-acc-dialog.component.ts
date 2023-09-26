@@ -4,10 +4,7 @@ import { MatDialogRef, _closeDialogVia } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { countries } from 'src/app/shared/country-codes';
-import { UpdatePhone } from 'src/app/model/requests/UpdatePhone';
 import { catchError, of, switchMap } from 'rxjs';
-import { CodeVerification } from 'src/app/model/requests/CodeVerification';
-import { PasswordChange } from 'src/app/model/requests/PasswordChange';
 import { Router } from '@angular/router';
 import { RegistrationUser } from 'src/app/model/RegistrationUser';
 import { User } from 'src/app/model/User';
@@ -123,12 +120,11 @@ export class CreateAccDialogComponent implements OnInit {
 
   //add a phone number to the user account
   onSubmitPhoneNumber() {
-    this.completePhoneNo =
-      this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
-    const updatePhone: UpdatePhone = new UpdatePhone(
-      this.user.username,
-      this.completePhoneNo
-    );
+    this.completePhoneNo = this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
+    const updatePhone = {
+      username: this.user.username,
+      phone: this.completePhoneNo
+    };
 
     this.authService
       .updateUserPhone(updatePhone)
@@ -155,10 +151,10 @@ export class CreateAccDialogComponent implements OnInit {
 
   //send verification code to email
   sendVerificationCode() {
-    const verificationCode = new CodeVerification(
-      this.codeForm.value.code,
-      this.user.username
-    );
+    const verificationCode = {
+      code: this.codeForm.value.code,
+      username: this.user.username
+    };
 
     this.authService.verifyCode(verificationCode).subscribe(
       (data) => {
@@ -174,10 +170,10 @@ export class CreateAccDialogComponent implements OnInit {
 
   //add a password to the account
   changePassword() {
-    const changePassword = new PasswordChange(
-      this.user.username,
-      this.passwordForm.value.password
-    );
+    const changePassword = {
+      username: this.user.username,
+      password: this.passwordForm.value.password
+  };
 
     this.authService.changePassword(changePassword).subscribe(
       (data) => {

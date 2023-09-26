@@ -4,7 +4,6 @@ import { CreateAccDialogComponent } from '../create-acc-dialog/create-acc-dialog
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { Login } from 'src/app/model/requests/Login';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
@@ -38,11 +37,15 @@ export class LoginDialogComponent implements OnInit {
   }
 
   loginBtn(){
-    const login = new Login(this.loginForm.value.email, this.loginForm.value.password);
+    const login = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+
     this.authService.login(login).subscribe(
       data => {
         localStorage.setItem('token', data.token);
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/home');
         this.dialogRef.close();
       },
       error => {
