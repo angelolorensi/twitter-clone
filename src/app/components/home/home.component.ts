@@ -1,7 +1,7 @@
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/model/Post';
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
     private dialog: MatDialog,
   ) {
     this.tweetForm = fb.group({
-      tweetContent: ['']
+      tweetContent: ['', Validators.required]
     })
   }
 
@@ -186,6 +186,10 @@ export class HomeComponent implements OnInit {
 
   //Tweet submission logic
   submitTweet(){
+    if(!this.tweetForm.valid){
+      return;
+    }
+
     const tweetData = {
       content: this.tweetForm.value.tweetContent,
       author: {

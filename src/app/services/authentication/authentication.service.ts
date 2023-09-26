@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
-  public registerUser(user: { name: string, email: string, dob: string }){
+  public registerUser(user: { name: any, email: any, dob: any }){
     return this.http.post<User>(environment.apiAdress + '/auth/register', user);
   }
 

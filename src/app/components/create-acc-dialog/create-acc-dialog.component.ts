@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { countries } from 'src/app/shared/country-codes';
 import { catchError, of, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
-import { RegistrationUser } from 'src/app/model/RegistrationUser';
 import { User } from 'src/app/model/User';
 
 @Component({
@@ -35,7 +34,6 @@ export class CreateAccDialogComponent implements OnInit {
   username: string = '';
   email: string = '';
   dob: string = '';
-  registrationUser: RegistrationUser;
   dateToSend: Date = new Date();
   monthConverted: number = 0;
   countryCodes: any[] = countries;
@@ -57,11 +55,6 @@ export class CreateAccDialogComponent implements OnInit {
       month: ['', [Validators.required]],
       year: ['', [Validators.required]],
     });
-    this.registrationUser = {
-      name: '',
-      email: '',
-      dob: '',
-    };
     this.phoneForm = fb.group({
       countryCode: ['', Validators.required],
       phoneNo: ['', Validators.required],
@@ -95,12 +88,14 @@ export class CreateAccDialogComponent implements OnInit {
     const serializedDate = dateObject.toISOString();
 
     //set user input data o a user object
-    this.registrationUser.dob = serializedDate;
-    this.registrationUser.email = this.registerForm.value.email;
-    this.registrationUser.name = this.registerForm.value.name;
+    const user = {
+      dob: serializedDate,
+      email: this.registerForm.value.email,
+      name: this.registerForm.value.name
+    }
 
     //send user registration request via service
-    this.authService.registerUser(this.registrationUser).subscribe(
+    this.authService.registerUser(user).subscribe(
       (data) => {
         this.page2 = false;
         this.page3 = true;

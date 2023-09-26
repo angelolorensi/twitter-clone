@@ -438,7 +438,8 @@ ul::-webkit-scrollbar{
 }
 
 .post-headerSpecial {
-  font-weight: 600;
+  font-family: "Chirp regular";
+  font-weight: 500;
   font-size: 15px;
   color: gray;
 }
@@ -455,8 +456,8 @@ ul::-webkit-scrollbar{
 .post-headerText h3 {
   font-size: 17px;
   margin-bottom: 5px;
-  color: #d1d1d1;
-  font-family: "Chirp Regular";
+  color: #ffffff;
+  font-family: "Chirp Bold";
 }
 
 .post-content {
