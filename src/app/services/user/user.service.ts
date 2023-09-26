@@ -10,6 +10,10 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
+  public follow(followedUser: string){
+    return this.http.put(environment.apiAdress + '/user/follow', {followedUser : followedUser});
+  }
+
   public getUserFollowers(username: string | undefined){
     return this.http.get<User[]>(environment.apiAdress + '/user/followers/' + username);
   }

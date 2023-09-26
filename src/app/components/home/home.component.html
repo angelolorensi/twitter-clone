@@ -104,7 +104,7 @@
               <div class="userInfoCard-top">
                 <img *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
                 <img *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
-                <button mat-button>Follow</button>
+                <button mat-button (click)="follow(post.author.username)">Follow</button>
               </div>
               <div class="userInfoCard-mid">
                 <h1>{{post.author.name}}</h1>

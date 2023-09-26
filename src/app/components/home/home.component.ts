@@ -76,6 +76,16 @@ export class HomeComponent implements OnInit {
     this.loadPosts();
   }
 
+  //Follow logic
+  follow(followedUser: string){
+    this.userService.follow(followedUser).subscribe(
+      data => {
+        this.loadPosts();
+      }
+    );
+  }
+
+  //Opens first login dialog
   firstLogin(){
     if(this.user?.firstLogin){
       const dialogRef = this.dialog.open(FirstLoginDialogComponent, {
