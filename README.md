@@ -1,27 +1,40 @@
-# TwitterClone
+# Twitter Clone
+Este é um projeto de clone do frontend da rede social Twitter desenvolvido em Angular. O objetivo deste projeto é demonstrar as habilidades de desenvolvimento frontend e a familiaridade com o framework Angular, recriando a interface de usuário do Twitter.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+## Funcionalidades
 
-## Development server
+- **Login**: Pagina de login e registro de conta.
+ 
+  ![Pagina de Login](twitter-clone/screenshots/screenshot1.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+  ![Dialog de login](twitter-clone/screenshots/screenshot3.png)
 
-## Code scaffolding
+  ![Dialog de registro](twitter-clone/screenshots/screenshot4.png)
+  
+- **Tweetagem**: Os usuários podem criar e publicar novos tweets, incluindo texto e imagens.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ ![Home](twitter-clone/screenshots/screenshot2.png)
 
-## Build
+- **Segurança**: Pagina utiliza o sistema de token JWT conjunto com spring security na api.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Tecnologias Utilizadas
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular: Utilizado para a construção da interface de usuário.
 
-## Running end-to-end tests
+- HTML/CSS: Para a estrutura e estilos da aplicação.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Spring Boot: Para armazenar e recuperar dados de tweets e usuários.
 
-## Further help
+## Como Executar o Projeto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/angelolorensi/twitter-clone
+
+   ng add @angular/material para instalar o angular material.
+
+   npm install no angular para pegar as dependencias.
+
+   ng serve para rodar o frontend.
