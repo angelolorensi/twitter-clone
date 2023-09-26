@@ -7,7 +7,7 @@
   <form class="form-fields" (submit)="onNextBtnClicked()" [formGroup]="registerForm">
     <mat-form-field class="input-form-field" color="primary" appearance="outline">
       <mat-label>Nome</mat-label>
-      <input matInput formControlName="username"/>
+      <input matInput formControlName="name"/>
     </mat-form-field>
     <mat-form-field class="input-form-field" color="primary" appearance="outline">
       <mat-label>E-mail</mat-label>
@@ -141,7 +141,7 @@
   <form [formGroup]="passwordForm" (submit)="changePassword()">
     <mat-form-field class="input-form-field" color="primary" appearance="outline">
       <mat-label>Senha</mat-label>
-      <input matInput formControlName="password"/>
+      <input type="password" matInput formControlName="password"/>
     </mat-form-field>
     <button class="next-btn bg-blue" type="submit">Enviar</button>
   </form>

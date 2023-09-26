@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { Post } from 'src/app/model/Post';
 import { User } from 'src/app/model/User';
 import { UserService } from 'src/app/services/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FirstLoginDialogComponent } from '../first-login-dialog/first-login-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -60,7 +62,8 @@ export class HomeComponent implements OnInit {
     private authService:AuthenticationService,
     private fb:FormBuilder,
     private postService: PostService,
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MatDialog,
   ) {
     this.tweetForm = fb.group({
       tweetContent: ['']
@@ -71,6 +74,17 @@ export class HomeComponent implements OnInit {
     //check if logged in
     this.loadData();
     this.loadPosts();
+  }
+
+  firstLogin(){
+    if(this.user?.firstLogin){
+      const dialogRef = this.dialog.open(FirstLoginDialogComponent, {
+        panelClass: 'dialog',
+        backdropClass: 'dialog-overlay',
+        disableClose: true,
+        data: {user : this.user}
+      });
+    }
   }
 
   //Displays the user info card when mouse hovered over post
@@ -112,12 +126,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //Loads user data into the page
   loadData(){
     //check if logged in
     this.token = localStorage.getItem('token');
     this.authService.userLoggedIn().subscribe(
       (data) => {
         this.user = data;
+        this.firstLogin();
       },
       (error) => {
         this.router.navigateByUrl('/login');
@@ -126,6 +142,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  //Loads posts into the page
   loadPosts(){
     //load all posts
     this.postService.getAllPosts().subscribe(
@@ -157,6 +174,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  //Tweet submission logic
   submitTweet(){
     const tweetData = {
       content: this.tweetForm.value.tweetContent,

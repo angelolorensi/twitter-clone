@@ -15,7 +15,7 @@ import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-
 export class LoginDialogComponent implements OnInit {
 
   loginForm: FormGroup;
-  usernameInput: boolean = true;
+  emailInput: boolean = true;
   passwordInput: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>,
@@ -24,7 +24,7 @@ export class LoginDialogComponent implements OnInit {
               private authService:AuthenticationService,
               private router:Router) {
     this.loginForm = fb.group({
-      username: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     })
   }
@@ -33,12 +33,12 @@ export class LoginDialogComponent implements OnInit {
   }
 
   nextBtn(){
-    this.usernameInput = false;
+    this.emailInput = false;
     this.passwordInput = true;
   }
 
   loginBtn(){
-    const login = new Login(this.loginForm.value.username, this.loginForm.value.password);
+    const login = new Login(this.loginForm.value.email, this.loginForm.value.password);
     this.authService.login(login).subscribe(
       data => {
         localStorage.setItem('token', data.token);

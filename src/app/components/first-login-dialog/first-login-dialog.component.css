@@ -1,0 +1,95 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  height: 550px;
+  border-radius: 30px;
+}
+
+.logo{
+  width: 40px;
+  margin-bottom: 1em;
+}
+
+.main{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main h1{
+  font-family: 'Chirp Bold';
+  font-size: 34px;
+}
+
+.main p{
+  font-family: 'Chirp regular';
+  color: #747474;
+}
+
+.main img{
+  width: 250px;
+  height: 250px;
+  margin-top: 3em;
+  cursor: pointer;
+  border-radius: 100px;
+}
+
+.container button{
+  margin-top: 3em;
+  align-self: end;
+  justify-self: end;
+  color: #ffffff;
+  background-color: #1984cb;
+  font-family: "chirp bold";
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 2em;
+}
+
+.container button:hover {
+  background-color: #1672b0;
+}
+
+.container button:active {
+  transform: scale(0.95);
+}
+
+.dialog-overlay{
+  background-color: rgba(154, 154, 154, 0.5);
+}
+
+.input-form-field{
+  width:400px;
+  color: white;
+  margin-top: 3em;
+  font-size: 17px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+
+.finalPage{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5em;
+  text-align: center;
+}
+
+.finalPage button{
+  width: 100%;
+}

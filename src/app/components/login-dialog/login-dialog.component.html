@@ -10,11 +10,11 @@
   </div>
   <p class="divider"><span>ou</span></p>
   <form [formGroup]="loginForm" (ngSubmit)="loginBtn()">
-    <mat-form-field *ngIf="usernameInput" class="login-input-form-field" color="primary" appearance="outline">
-      <mat-label>Nome de usuário</mat-label>
-      <input type="text" matInput formControlName="username"/>
-      <mat-hint class="error" *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
-        O campo de nome de usuário é obrigatório.
+    <mat-form-field *ngIf="emailInput" class="login-input-form-field" color="primary" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="text" matInput formControlName="email"/>
+      <mat-hint class="error" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+        O campo de email é obrigatório.
       </mat-hint>
     </mat-form-field>
     <mat-form-field *ngIf="passwordInput" class="login-input-form-field" color="primary" appearance="outline">
@@ -24,10 +24,10 @@
         O campo de senha é obrigatório.
       </mat-hint>
       <mat-hint class="error" *ngIf="loginForm.get('password')?.hasError('invalidCredentials')">
-        Nome de usuario ou senha incorreto.
+        Email ou senha incorreto.
       </mat-hint>
     </mat-form-field>
-    <button class="login-btn" type="submit" (click)="nextBtn()" *ngIf="usernameInput">Avançar</button>
+    <button class="login-btn" type="submit" (click)="nextBtn()" *ngIf="emailInput">Avançar</button>
     <button class="login-btn" type="submit" (click)="loginBtn()" *ngIf="passwordInput">Login</button>
   </form>
   <button (click)="forgotPassword()" class="forgot-password-btn">Esqueceu sua senha?</button>

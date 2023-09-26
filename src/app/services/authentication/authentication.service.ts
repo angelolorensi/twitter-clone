@@ -17,8 +17,8 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
-  public registerUser(user: RegistrationUser): Observable<RegistrationUser> {
-    return this.http.post<RegistrationUser>(environment.apiAdress + '/auth/register', user);
+  public registerUser(user: RegistrationUser): Observable<User> {
+    return this.http.post<User>(environment.apiAdress + '/auth/register', user);
   }
 
   public updateUserPhone(updatePhone: UpdatePhone): Observable<UpdatePhone> {

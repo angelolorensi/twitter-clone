@@ -19,7 +19,10 @@ export class UserService {
   }
 
   public changeProfilePicture(image: File){
-    return this.http.post<User>(environment.apiAdress + '/user/pfp', image);
+    const formData: FormData = new FormData();
+    formData.append('image', image);
+
+    return this.http.post<User>(environment.apiAdress + '/user/pfp', formData);
   }
 
   public changeBannerPicture(image: File){
@@ -28,5 +31,13 @@ export class UserService {
 
   public downloadPicture(imageName: string){
     return this.http.get(environment.apiAdress + '/images/' + imageName);
+  }
+
+  public updateUsername(newUsername: string){
+    return this.http.put(environment.apiAdress + '/user/username', {newUsername: newUsername});
+  }
+
+  public removeFirstTime(){
+    return this.http.get(environment.apiAdress + '/user/firstTime');
   }
 }

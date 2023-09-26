@@ -47,7 +47,12 @@ html, body{
 }
 
 .dialog .mat-dialog-container{
-  background-color: #000000;
+  background-color: black;
+}
+
+.dialog-overlay{
+  background-color: rgba(80, 83, 97, 0.25);
+  backdrop-filter: blur(1px);
 }
 
 mat-label{

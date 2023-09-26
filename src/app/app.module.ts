@@ -24,6 +24,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { TokenInterceptor } from './services/token-interceptor/token.interceptor';
+import { FirstLoginDialogComponent } from './components/first-login-dialog/first-login-dialog.component';
+import { NoSpaceDirective } from './shared/no-space/no-space.directive';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { TokenInterceptor } from './services/token-interceptor/token.interceptor
     LoginDialogComponent,
     CreateAccDialogComponent,
     ForgotPasswordDialogComponent,
+    FirstLoginDialogComponent,
+    NoSpaceDirective,
   ],
   imports: [
     BrowserModule,

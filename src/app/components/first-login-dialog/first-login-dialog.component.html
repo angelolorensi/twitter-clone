@@ -1,0 +1,29 @@
+<body >
+  <div class="container" *ngIf="page1">
+    <img class="logo" src="assets/img/twitter-logo.png" />
+    <div class="main">
+      <h1>Escolher uma foto de perfil</h1>
+      <p>Tem uma selfie favorita? Carregue agora.</p>
+      <img (click)="imageInput.click()" [src]="imageUrl" alt="">
+      <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
+    </div>
+    <button (click)="changeProfilePicture()">Próximo</button>
+  </div>
+  <div class="container" *ngIf="page2">
+    <img class="logo" src="assets/img/twitter-logo.png" />
+    <div class="main">
+      <h1>Como devemos chamar você?</h1>
+      <p>Seu nome de usuário é exclusivo. Você sempre pode alterá-lo depois.</p>
+      <p>Se escolher por trocar o nome de usuário, você sera redirecionado para pagina de login.</p>
+      <form [formGroup]="form">
+        <mat-form-field class="input-form-field" color="primary" appearance="outline" >
+          <mat-label>Nome de usuário</mat-label>
+          <h2 matPrefix>@ &nbsp;</h2>
+          <input appNoSpace matInput type="text" formControlName="username"/>
+        </mat-form-field>
+      </form>
+      <button (click)="changeUsername()">Finalizar</button>
+    </div>
+  </div>
+</body>
+

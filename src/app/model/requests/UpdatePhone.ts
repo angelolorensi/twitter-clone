@@ -1,5 +1,5 @@
 export class UpdatePhone{
-  username: string;
+  username: string | undefined;
   phone:string;
 
   constructor(username:string, phone:string){

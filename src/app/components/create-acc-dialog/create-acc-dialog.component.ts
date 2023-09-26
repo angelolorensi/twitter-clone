@@ -10,6 +10,7 @@ import { CodeVerification } from 'src/app/model/requests/CodeVerification';
 import { PasswordChange } from 'src/app/model/requests/PasswordChange';
 import { Router } from '@angular/router';
 import { RegistrationUser } from 'src/app/model/RegistrationUser';
+import { User } from 'src/app/model/User';
 
 @Component({
   selector: 'app-create-acc-dialog',
@@ -37,12 +38,13 @@ export class CreateAccDialogComponent implements OnInit {
   username: string = '';
   email: string = '';
   dob: string = '';
-  user: RegistrationUser;
+  registrationUser: RegistrationUser;
   dateToSend: Date = new Date();
   monthConverted: number = 0;
   countryCodes: any[] = countries;
   selectedCode: string = '';
   completePhoneNo: string = '';
+  user!: User;
 
   constructor(
     public dialogRef: MatDialogRef<CreateAccDialogComponent>,
@@ -52,14 +54,14 @@ export class CreateAccDialogComponent implements OnInit {
     private router: Router
   ) {
     this.registerForm = fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(35)]],
       email: ['', [Validators.required, Validators.email]],
       day: ['', [Validators.required]],
       month: ['', [Validators.required]],
       year: ['', [Validators.required]],
     });
-    this.user = {
-      username: '',
+    this.registrationUser = {
+      name: '',
       email: '',
       dob: '',
     };
@@ -71,7 +73,7 @@ export class CreateAccDialogComponent implements OnInit {
       code: ['', Validators.required],
     });
     this.passwordForm = fb.group({
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
     });
   }
 
@@ -96,16 +98,17 @@ export class CreateAccDialogComponent implements OnInit {
     const serializedDate = dateObject.toISOString();
 
     //set user input data o a user object
-    this.user.dob = serializedDate;
-    this.user.email = this.registerForm.value.email;
-    this.user.username = this.registerForm.value.username;
+    this.registrationUser.dob = serializedDate;
+    this.registrationUser.email = this.registerForm.value.email;
+    this.registrationUser.name = this.registerForm.value.name;
 
     //send user registration request via service
-    this.authService.registerUser(this.user).subscribe(
+    this.authService.registerUser(this.registrationUser).subscribe(
       (data) => {
         this.page2 = false;
         this.page3 = true;
         this.stepCounter++;
+        this.user = data;
       },
       (error) => {
         if ((error.error = 'The username or email you provided is already in use')) {
@@ -123,7 +126,7 @@ export class CreateAccDialogComponent implements OnInit {
     this.completePhoneNo =
       this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
     const updatePhone: UpdatePhone = new UpdatePhone(
-      this.registerForm.value.username,
+      this.user.username,
       this.completePhoneNo
     );
 
@@ -154,7 +157,7 @@ export class CreateAccDialogComponent implements OnInit {
   sendVerificationCode() {
     const verificationCode = new CodeVerification(
       this.codeForm.value.code,
-      this.registerForm.value.username
+      this.user.username
     );
 
     this.authService.verifyCode(verificationCode).subscribe(
@@ -172,7 +175,7 @@ export class CreateAccDialogComponent implements OnInit {
   //add a password to the account
   changePassword() {
     const changePassword = new PasswordChange(
-      this.registerForm.value.username,
+      this.user.username,
       this.passwordForm.value.password
     );
 
@@ -223,7 +226,7 @@ export class CreateAccDialogComponent implements OnInit {
   onNextBtnClicked() {
     if (this.registerForm.valid) {
       //set user input data from page 1 to page 2 for confirmation
-      this.username = this.registerForm.value.username;
+      this.username = this.registerForm.value.name;
       this.email = this.registerForm.value.email;
       this.dob =
         this.registerForm.value.day +

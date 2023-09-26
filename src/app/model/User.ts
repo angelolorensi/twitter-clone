@@ -21,6 +21,7 @@ export interface User{
   dateOfBirth: Date;
   enabled: boolean;
   verified: boolean;
+  firstLogin: boolean;
   followersCount:number;
   followingCount:number;
 }
