@@ -4,16 +4,22 @@ Este é um projeto de clone do frontend da rede social Twitter desenvolvido em A
 ## Funcionalidades
 
 - **Login**: Pagina de login e registro de conta.
- 
-  ![Pagina de Login](https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot1.png)
 
-  ![Dialog de login](https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot4.png)
-
-  ![Dialog de registro](https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot3.png))
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot1.png"  width="700px">
+  </div>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot3.png"  width="500px">
+  </div>
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot4.png"  width="500px">
+  </div>
   
 - **Tweetagem**: Os usuários podem criar e publicar novos tweets, incluindo texto e imagens.
 
- ![Home](https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot2.png)
+  <div align="center">
+    <img src="https://raw.githubusercontent.com/angelolorensi/twitter-clone/main/screenshots/screenshot2.png"  width="700px">
+  </div>
 
 - **Segurança**: Pagina utiliza o sistema de token JWT conjunto com spring security na api.
 
