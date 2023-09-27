@@ -21,6 +21,9 @@ body{
 }
 
 .feed-header{
+  display: flex;
+  align-items: center;
+  gap: 2em;
   padding: 15px 20px;
   border-bottom: 1px solid #424242;
   border-left: 1px solid #424242;

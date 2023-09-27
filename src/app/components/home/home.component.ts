@@ -7,24 +7,31 @@ import { User } from 'src/app/model/User';
 import { UserService } from 'src/app/services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FirstLoginDialogComponent } from '../first-login-dialog/first-login-dialog.component';
-
+import localePT from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePT);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  //header style variables
+
+  //Header style variables
   fyHeader: string = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
   followingHeader: string = '';
 
-  //user data variables
-  @Output() user?: User;
-  token:string | null = '';
-  userFollowingList: User[] = [];
-  userFollowersList: User[] = [];
+  //Page variables
+  homePage: boolean = true;
+  profilePage: boolean = false;
 
-  //posts variables
+  //User data variables
+  token:string | null = '';
+  @Output() user?: User;
+  @Output() followingArray: User[] = [];
+  @Output() followersArray: User[] = [];
+
+  //Posts variables
   feedPosts?: any[];
 
   constructor(
@@ -39,7 +46,31 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //check if logged in
     this.loadData();
-    this.loadPosts();
+    this.loadAllPosts();
+  }
+
+  callProfilePage(){
+    this.homePage = false;
+    this.profilePage = true;
+    this.getUserFollowing();
+  }
+
+  goBackBtn(){
+    this.homePage = true;
+    this.profilePage = false;
+  }
+
+  getUserFollowing(){
+    this.userService.getUserFollowing(this.user?.username).subscribe(
+      following => {
+        this.followingArray = following;
+      }
+    );
+    this.userService.getUserFollowers(this.user?.username).subscribe(
+      followers => {
+        this.followersArray = followers;
+      }
+    );
   }
 
   //Opens first login dialog
@@ -82,7 +113,7 @@ export class HomeComponent implements OnInit {
   }
 
   //Loads posts into the page
-  loadPosts(){
+  loadAllPosts(){
     //load all posts
     this.postService.getAllPosts().subscribe(
       data => {

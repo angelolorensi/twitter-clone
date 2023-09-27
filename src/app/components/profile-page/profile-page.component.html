@@ -1,0 +1,32 @@
+<div class="profilePage">
+
+  <div class="banner">
+    <img class="profile-image" *ngIf="user?.profilePicture" src="{{user?.profilePicture?.imageUrl}}" alt="Profile Picture">
+    <img class="profile-image" *ngIf="!user?.profilePicture" src="\assets\img\select_image_icon.png" alt="Default Profile Picture">
+    <img class="banner-image" *ngIf="user?.bannerPicture" src="{{user?.bannerPicture?.imageUrl}}" alt="Banner Picture">
+    <img class="banner-image" *ngIf="!user?.bannerPicture" src="\assets\img\default-banner.png" alt="Default Banner Picture">
+  </div>
+  <div class="user-info">
+    <div class="user-info-title">
+      <h1>{{user?.name}}</h1>
+      <h2>@{{user?.username}}</h2>
+    </div>
+    <div class="user-info-bio">
+      <p>{{user?.bio}}</p>
+    </div>
+    <div class="user-info-dates">
+      <mat-icon>child_care</mat-icon> <p>Nascido em {{user?.dateOfBirth | date:"dd 'de' MMMM, yyyy" : '': 'pt'}}</p>
+      &nbsp;&nbsp;&nbsp;
+      <mat-icon>calendar_month</mat-icon> <p>Ingressou em {{user?.accountCreationDate | date: "MMMM 'de' yyyy": '': 'pt'}}</p>
+    </div>
+    <div class="user-info-follows">
+      <div>
+        <b>{{followingArray.length}}</b><p>Following</p>
+      </div>
+      <div>
+        <b>{{followersArray.length}}</b><p>Followers</p>
+      </div>
+    </div>
+  </div>
+
+</div>

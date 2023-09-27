@@ -1,23 +1,24 @@
 <body>
 
-  <app-sidebar class="sidebar" [user]="user"></app-sidebar>
+  <app-sidebar class="sidebar" [user]="user" (callProfilePage)="callProfilePage()"></app-sidebar>
 
   <div class="feed">
-
     <div class="feed-header">
-      <h2>Home</h2>
+      <h2 *ngIf="homePage">Página Inicial</h2>
+      <button *ngIf="profilePage" (click)="goBackBtn()" class="close-btn"><mat-icon color="accent">arrow_back</mat-icon></button>
+      <h2 *ngIf="profilePage">{{user?.name}}</h2>
     </div>
 
-    <div class="feed-subheader">
-      <h2 [style]="fyHeader" (click)="getSelectedHeader('For You')">For you</h2>
-      <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Following</h2>
+    <div class="feed-subheader" *ngIf="homePage">
+      <h2 [style]="fyHeader" (click)="getSelectedHeader('For You')">Para você</h2>
+      <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Seguindo</h2>
     </div>
 
     <ul>
-      <app-tweetbox (callLoadPosts)="loadPosts()" [user]="user"></app-tweetbox>
-      <app-post [feedPosts]="feedPosts" (callLoadPosts)="loadPosts()"></app-post>
+      <app-tweetbox *ngIf="homePage" (callLoadPosts)="loadAllPosts()" [user]="user" ></app-tweetbox>
+      <app-profile-page *ngIf="profilePage" [user]="user" [followingArray]="followingArray" [followersArray]="followersArray"></app-profile-page>
+      <app-post [feedPosts]="feedPosts" (callLoadPosts)="loadAllPosts()"></app-post>
     </ul>
-
   </div>
 
   <div class="widgets">

@@ -13,7 +13,7 @@
     <div class="tweetbox-input" [formGroup]="tweetForm">
       <img *ngIf="user?.profilePicture?.imageUrl" [src]="user?.profilePicture?.imageUrl" alt="User Avatar" />
       <img *ngIf="!user?.profilePicture?.imageUrl" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
-      <textarea type="text" placeholder="What's happening?" formControlName="tweetContent"></textarea>
+      <textarea type="text" placeholder="O que está acontecendo?" formControlName="tweetContent"></textarea>
     </div>
     <div class="tweetBox-replyRestriction">
       <button mat-button [matMenuTriggerFor]="ReplyRestriction">
@@ -37,7 +37,7 @@
         <mat-icon title="Schedule" color="primary" class="tweetBox-icons">calendar_month</mat-icon>
         <mat-icon title="Location" color="primary" class="tweetBox-icons">location_on</mat-icon>
       </div>
-      <button class="tweetBox-btn" (click)="submitTweet()">Post</button>
+      <button class="tweetBox-btn" (click)="submitTweet()">Postar</button>
     </div>
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/User';
 
@@ -10,6 +10,7 @@ import { User } from 'src/app/model/User';
 export class SidebarComponent implements OnInit {
 
   @Input() user?: User;
+  @Output() callProfilePage = new EventEmitter<void>();
 
   constructor(private router:Router) { }
 
@@ -17,7 +18,7 @@ export class SidebarComponent implements OnInit {
   }
 
   profileBtn(){
-    this.router.navigateByUrl('/profile/' + this.user?.username);
+    this.callProfilePage.emit();
   }
 
 

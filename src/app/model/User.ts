@@ -19,6 +19,7 @@ export interface User{
   email: string;
   phone: string;
   dateOfBirth: Date;
+  accountCreationDate:Date;
   enabled: boolean;
   verified: boolean;
   firstLogin: boolean;
