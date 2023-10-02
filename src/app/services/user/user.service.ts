@@ -30,7 +30,10 @@ export class UserService {
   }
 
   public changeBannerPicture(image: File){
-    return this.http.post<User>(environment.apiAdress + '/user/banner', image);
+    const formData: FormData = new FormData();
+    formData.append('image', image);
+    
+    return this.http.post<User>(environment.apiAdress + '/user/banner', formData);
   }
 
   public downloadPicture(imageName: string){

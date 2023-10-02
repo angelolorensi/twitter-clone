@@ -1,0 +1,14 @@
+div {
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+}
+
+div h1{
+  color: white;
+  font-family: "Chirp Bold";
+}
+
+div button{
+  background-color: white;
+}

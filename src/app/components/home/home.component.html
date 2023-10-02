@@ -1,11 +1,16 @@
 <body>
 
-  <app-sidebar class="sidebar" [user]="user" (callProfilePage)="callProfilePage()"></app-sidebar>
+  <app-sidebar
+    class="sidebar"
+    [user]="user"
+    (callProfilePage)="callProfilePage()"
+    (callHomePage)="callHomePage()">
+  </app-sidebar>
 
   <div class="feed">
     <div class="feed-header">
       <h2 *ngIf="homePage">Página Inicial</h2>
-      <button *ngIf="profilePage" (click)="goBackBtn()" class="close-btn"><mat-icon color="accent">arrow_back</mat-icon></button>
+      <button *ngIf="profilePage" (click)="callHomePage()" class="close-btn"><mat-icon color="accent">arrow_back</mat-icon></button>
       <h2 *ngIf="profilePage">{{user?.name}}</h2>
     </div>
 
@@ -15,9 +20,23 @@
     </div>
 
     <ul>
-      <app-tweetbox *ngIf="homePage" (callLoadPosts)="loadAllPosts()" [user]="user" ></app-tweetbox>
-      <app-profile-page *ngIf="profilePage" [user]="user" [followingArray]="followingArray" [followersArray]="followersArray"></app-profile-page>
-      <app-post [feedPosts]="feedPosts" (callLoadPosts)="loadAllPosts()"></app-post>
+      <app-tweetbox
+        *ngIf="homePage"
+        (callLoadPosts)="loadAllPosts()"
+        [user]="user">
+      </app-tweetbox>
+
+      <app-profile-page
+        *ngIf="profilePage"
+        [user]="user"
+        [followingArray]="followingArray"
+        [followersArray]="followersArray">
+      </app-profile-page>
+
+      <app-post
+        [feedPosts]="feedPosts"
+        (callLoadPosts)="loadAllPosts()">
+      </app-post>
     </ul>
   </div>
 

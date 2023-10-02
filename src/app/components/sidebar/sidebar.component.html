@@ -1,8 +1,8 @@
 <div>
-  <img class="sidebar-logo" routerLink="/home" src="assets/img/twitter-logo.png"/>
+  <img class="sidebar-logo" (click)="homeBtn()"src="assets/img/twitter-logo.png"/>
   <div class="sidebar-options">
     <mat-icon>home</mat-icon>
-    <h2 class="sidebar-options-text">Página Inicial</h2>
+    <h2 class="sidebar-options-text" (click)="homeBtn()">Página Inicial</h2>
   </div>
   <div class="sidebar-options">
     <mat-icon>search</mat-icon>

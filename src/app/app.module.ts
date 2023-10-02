@@ -31,6 +31,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TweetboxComponent } from './components/tweetbox/tweetbox.component';
 import { PostComponent } from './components/post/post.component';
 import { WidgetsComponent } from './components/widgets/widgets.component';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { WidgetsComponent } from './components/widgets/widgets.component';
     TweetboxComponent,
     PostComponent,
     WidgetsComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

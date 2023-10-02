@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
     this.getUserFollowing();
   }
 
-  goBackBtn(){
+  callHomePage(){
     this.homePage = true;
     this.profilePage = false;
   }

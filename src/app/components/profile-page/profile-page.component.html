@@ -1,10 +1,12 @@
 <div class="profilePage">
 
   <div class="banner">
-    <img class="profile-image" *ngIf="user?.profilePicture" src="{{user?.profilePicture?.imageUrl}}" alt="Profile Picture">
-    <img class="profile-image" *ngIf="!user?.profilePicture" src="\assets\img\select_image_icon.png" alt="Default Profile Picture">
-    <img class="banner-image" *ngIf="user?.bannerPicture" src="{{user?.bannerPicture?.imageUrl}}" alt="Banner Picture">
-    <img class="banner-image" *ngIf="!user?.bannerPicture" src="\assets\img\default-banner.png" alt="Default Banner Picture">
+    <img class="profile-image" (click)="profileImageInput.click()" *ngIf="user?.profilePicture" src="{{user?.profilePicture?.imageUrl}}" alt="Profile Picture">
+    <img class="profile-image" (click)="profileImageInput.click()" *ngIf="!user?.profilePicture" src="/assets/img/select_image_icon.png" alt="Default Profile Picture">
+    <input #profileImageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event, 'pfp')">
+    <img class="banner-image" (click)="bannerImageInput.click()" *ngIf="user?.bannerPicture" src="{{user?.bannerPicture?.imageUrl}}" alt="Banner Picture">
+    <img class="banner-image" (click)="bannerImageInput.click()" *ngIf="!user?.bannerPicture" src="/assets/img/default-banner.png" alt="Default Banner Picture">
+    <input #bannerImageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event, 'bnr')">
   </div>
   <div class="user-info">
     <div class="user-info-title">

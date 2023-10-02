@@ -11,10 +11,15 @@ export class SidebarComponent implements OnInit {
 
   @Input() user?: User;
   @Output() callProfilePage = new EventEmitter<void>();
+  @Output() callHomePage = new EventEmitter<void>();
 
   constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  homeBtn(){
+    this.callHomePage.emit();
   }
 
   profileBtn(){
