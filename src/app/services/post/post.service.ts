@@ -16,14 +16,18 @@ export class PostService {
     formData.append('post', JSON.stringify(postData));
     formData.append('media', mediaFile);
 
-    return this.http.post<any>(environment.apiAdress + '/posts/media', formData);
+    return this.http.post<Post>(environment.apiAdress + '/posts/media', formData);
   }
 
   public createPost(postData: any){
-    return this.http.post<any>(environment.apiAdress + '/posts/', postData);
+    return this.http.post<Post>(environment.apiAdress + '/posts/', postData);
   }
 
   public getAllPosts(){
-    return this.http.get<any>(environment.apiAdress + '/posts/');
+    return this.http.get<Post[]>(environment.apiAdress + '/posts/');
+  }
+
+  public getPostsByAuthor(userId:number){
+    return this.http.get<Post[]>(environment.apiAdress + '/posts/author/' + userId);
   }
 }

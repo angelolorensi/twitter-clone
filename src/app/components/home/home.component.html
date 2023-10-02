@@ -22,8 +22,8 @@
     <ul>
       <app-tweetbox
         *ngIf="homePage"
-        (callLoadPosts)="loadAllPosts()"
-        [user]="user">
+        [user]="user"
+        (callLoadPosts)="loadAllPosts()">
       </app-tweetbox>
 
       <app-profile-page
@@ -34,8 +34,15 @@
       </app-profile-page>
 
       <app-post
-        [feedPosts]="feedPosts"
+        *ngIf="homePage"
+        [feedPosts]="allPosts"
         (callLoadPosts)="loadAllPosts()">
+      </app-post>
+
+      <app-post
+        *ngIf="profilePage"
+        [feedPosts]="userPosts"
+        (callLoadPosts)="loadProfilePosts(user!.id)">
       </app-post>
     </ul>
   </div>

@@ -79,6 +79,7 @@ export class TweetboxComponent implements OnInit {
           this.showImage = false;
           this.selectedImage = null;
           this.tweetForm.get('tweetContent')?.setValue('')
+
           this.loadPosts();
         },
         error => {
@@ -90,6 +91,7 @@ export class TweetboxComponent implements OnInit {
         data => {
           console.log("text post saved");
           this.tweetForm.get('tweetContent')?.setValue('')
+
           this.loadPosts();
         },
         error => {

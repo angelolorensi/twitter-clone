@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FirstLoginDialogComponent } from '../first-login-dialog/first-login-dialog.component';
 import localePT from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { Post } from 'src/app/model/Post';
 registerLocaleData(localePT);
 @Component({
   selector: 'app-home',
@@ -32,7 +33,8 @@ export class HomeComponent implements OnInit {
   @Output() followersArray: User[] = [];
 
   //Posts variables
-  feedPosts?: any[];
+  allPosts?: Post[];
+  userPosts?: Post[];
 
   constructor(
     private router:Router,
@@ -53,6 +55,7 @@ export class HomeComponent implements OnInit {
     this.homePage = false;
     this.profilePage = true;
     this.getUserFollowing();
+    this.loadProfilePosts(this.user!.id);
   }
 
   callHomePage(){
@@ -114,27 +117,28 @@ export class HomeComponent implements OnInit {
 
   //Loads posts into the page
   loadAllPosts(){
+    console.log('loadAllPosts() function called');
     //load all posts
     this.postService.getAllPosts().subscribe(
       data => {
         //Save the post array and invert order of posts so that the newest shows on top
-        this.feedPosts = data.reverse();
+        this.allPosts = data.reverse();
 
         //Iterate through the post array
-        this.feedPosts?.forEach(
+        this.allPosts?.forEach(
           post =>{
 
             //Set the post author followings array
             this.userService.getUserFollowing(post.author.username).subscribe(
               following => {
-                post.author.followingCount = following;
+                post.author.followingCount = following.length;
               }
             )
 
             //Set the post author followers array
             this.userService.getUserFollowers(post.author.username).subscribe(
               followers => {
-                post.author.followersCount = followers;
+                post.author.followersCount = followers.length;
               }
             )
           }
@@ -142,6 +146,34 @@ export class HomeComponent implements OnInit {
         )
       }
     );
+  }
+
+  loadProfilePosts(userId: number){
+    this.postService.getPostsByAuthor(userId).subscribe(
+      data => {
+        this.userPosts = data.reverse();
+
+        this.userPosts?.forEach(
+          post =>{
+
+            //Set the post author followings array
+            this.userService.getUserFollowing(post.author.username).subscribe(
+              following => {
+                post.author.followingCount = following.length;
+              }
+            )
+
+            //Set the post author followers array
+            this.userService.getUserFollowers(post.author.username).subscribe(
+              followers => {
+                post.author.followersCount = followers.length;
+              }
+            )
+          }
+
+        )
+      }
+    )
   }
 
 }

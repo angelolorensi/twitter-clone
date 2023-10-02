@@ -16,7 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const jwtToken = localStorage.getItem('token');
 
     // Check if the request URL contains "/auth"
-    if (!request.url.includes('/auth')) {
+    if (!request.url.includes('/auth') || request.url.includes('/author')) {
       // If it doesn't contain "/auth", add the Authorization header
       request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + jwtToken) });
     }

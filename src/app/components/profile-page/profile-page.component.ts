@@ -21,6 +21,9 @@ export class ProfilePageComponent implements OnInit {
   selectedImage: File | null = null;
   imageUrl: string | ArrayBuffer | null | undefined = null;
 
+  //Post variables
+  @Output() callLoadPosts = new EventEmitter<void>();
+
   constructor(
     private userService:UserService,
     private dialog: MatDialog) {
