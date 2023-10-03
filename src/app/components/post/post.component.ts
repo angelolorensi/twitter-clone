@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from 'src/app/model/Post';
+import { User } from 'src/app/model/User';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class PostComponent implements OnInit {
   //posts variables
   @Output() callLoadPosts = new EventEmitter<void>();
   @Input() feedPosts?: any[];
+  @Input() user?: User;
   isCardVisible = false;
   cardPosition: any = { top: 0, left: 0 };
   currentHoveredPost: any;
@@ -18,7 +20,9 @@ export class PostComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   //Follow logic
   follow(followedUser: string) {

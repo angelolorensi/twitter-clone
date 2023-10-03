@@ -36,6 +36,7 @@
       <app-post
         *ngIf="homePage"
         [feedPosts]="allPosts"
+        [user]="user"
         (callLoadPosts)="loadAllPosts()">
       </app-post>
 
