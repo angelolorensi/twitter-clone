@@ -30,4 +30,8 @@ export class PostService {
   public getPostsByAuthor(userId:number){
     return this.http.get<Post[]>(environment.apiAdress + '/posts/author/' + userId);
   }
+
+  public likePost(postId: number){
+    return this.http.post<Post>(environment.apiAdress + '/posts/like', {postId: postId});
+  }
 }

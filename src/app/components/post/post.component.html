@@ -46,10 +46,21 @@
         </div>
       </ng-container>
       <div class="post-footer">
-        <mat-icon title="Reply" class="post-footer-icon"> chat_bubble </mat-icon>
-        <mat-icon title="Retweet" class="post-footer-icon"> repeat </mat-icon>
-        <mat-icon title="Favorite" class="post-footer-icon"> favorite_border </mat-icon>
-        <mat-icon title="Download" class="post-footer-icon"> publish </mat-icon>
+        <div>
+          <mat-icon title="Reply" class="post-footer-icon"> chat_bubble </mat-icon>
+        </div>
+        <div>
+          <mat-icon title="Retweet" class="post-footer-icon"> repeat </mat-icon>
+          <p>{{post.reposts.length}}</p>
+        </div>
+        <div>
+          <mat-icon title="Like" class="post-footer-icon" (click)="likePost(post.id)"> favorite_border </mat-icon>
+          <p>{{post.likes.length}}</p>
+        </div>
+        <div>
+          <mat-icon title="Download" class="post-footer-icon"> publish </mat-icon>
+          <p>{{post.bookmarks.length}}</p>
+        </div>
       </div>
     </div>
   </div>

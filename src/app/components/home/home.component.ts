@@ -117,7 +117,6 @@ export class HomeComponent implements OnInit {
 
   //Loads posts into the page
   loadAllPosts(){
-    console.log('loadAllPosts() function called');
     //load all posts
     this.postService.getAllPosts().subscribe(
       data => {

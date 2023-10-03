@@ -1,3 +1,4 @@
+import { PostService } from 'src/app/services/post/post.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from 'src/app/model/Post';
 import { User } from 'src/app/model/User';
@@ -18,7 +19,10 @@ export class PostComponent implements OnInit {
   currentHoveredPost: any;
   isMouseInCard = false;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private postService: PostService
+    ) {}
 
   ngOnInit(): void {
 
@@ -29,6 +33,14 @@ export class PostComponent implements OnInit {
     this.userService.follow(followedUser).subscribe((data) => {
       this.loadPosts();
     });
+  }
+
+  likePost(postId: number){
+    this.postService.likePost(postId).subscribe(
+      data => {
+        
+      }
+    )
   }
 
   //Displays the user info card when mouse hovered over post

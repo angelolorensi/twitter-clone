@@ -119,6 +119,17 @@
   margin-top: 10px;
 }
 
+.post-footer div {
+  display: flex;
+  gap: 8px;
+}
+
+.post-footer div p{
+  font-size: 18px;
+  margin-top: 2px;
+  color: #565656;
+}
+
 .post-footer-icon{
   font-size: 1.8em;
   cursor: pointer;
