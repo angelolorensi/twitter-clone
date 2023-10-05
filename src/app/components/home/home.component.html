@@ -43,6 +43,7 @@
       <app-post
         *ngIf="profilePage"
         [feedPosts]="userPosts"
+        [user]="user"
         (callLoadPosts)="loadProfilePosts(user!.id)">
       </app-post>
     </ul>

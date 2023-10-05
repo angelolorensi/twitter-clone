@@ -35,10 +35,19 @@ export class PostComponent implements OnInit {
     });
   }
 
-  likePost(postId: number){
+
+  like(postId: number){
     this.postService.likePost(postId).subscribe(
       data => {
-        
+        this.loadPosts();
+      }
+    )
+  }
+
+  repost(postId: number){
+    this.postService.repost(postId).subscribe(
+      data => {
+        this.loadPosts();
       }
     )
   }

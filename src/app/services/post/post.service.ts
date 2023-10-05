@@ -32,6 +32,10 @@ export class PostService {
   }
 
   public likePost(postId: number){
-    return this.http.post<Post>(environment.apiAdress + '/posts/like', {postId: postId});
+    return this.http.post(environment.apiAdress + '/posts/like', {postId: postId}, {responseType: 'text'});
+  }
+
+  public repost(postId: number){
+    return this.http.post(environment.apiAdress + '/posts/repost', {postId: postId}, {responseType: 'text'});
   }
 }
