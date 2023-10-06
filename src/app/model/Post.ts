@@ -6,7 +6,7 @@ export interface Post{
   content: string;
   postedDate: Date;
   author: User;
-  likes: [];
+  likes: User[];
   images: [];
   reposts: [];
   bookmarks: [];

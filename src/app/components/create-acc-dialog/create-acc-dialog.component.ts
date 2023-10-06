@@ -74,6 +74,10 @@ export class CreateAccDialogComponent implements OnInit {
 
   //add name, email and date of birth to the user account
   onRegister() {
+    if(!this.registerForm.valid){
+      return;
+    }
+
     //convert string date to Date object
     this.monthConverted = this.convertMonthToNumber(
       this.registerForm.value.month
@@ -115,6 +119,10 @@ export class CreateAccDialogComponent implements OnInit {
 
   //add a phone number to the user account
   onSubmitPhoneNumber() {
+    if(!this.phoneForm.valid){
+      return;
+    }
+
     this.completePhoneNo = this.phoneForm.value.countryCode + this.phoneForm.value.phoneNo;
     const updatePhone = {
       username: this.user.username,
@@ -146,6 +154,10 @@ export class CreateAccDialogComponent implements OnInit {
 
   //send verification code to email
   sendVerificationCode() {
+    if(!this.codeForm.valid){
+      return;
+    }
+
     const verificationCode = {
       code: this.codeForm.value.code,
       username: this.user.username
@@ -165,6 +177,10 @@ export class CreateAccDialogComponent implements OnInit {
 
   //add a password to the account
   changePassword() {
+    if(!this.passwordForm.valid){
+      return;
+    }
+
     const changePassword = {
       username: this.user.username,
       password: this.passwordForm.value.password

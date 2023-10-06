@@ -54,7 +54,10 @@
           <p>{{post.reposts.length}}</p>
         </div>
         <div>
-          <mat-icon title="Like" class="post-footer-icon" (click)="like(post.id)"> favorite_border </mat-icon>
+          <mat-icon title="Like" class="post-footer-icon" [style.color]="userHasLiked(post) ? '#1672b0' : '#565656'" (click)="likeToggle(post.id)">
+            <ng-container  *ngIf="userHasLiked(post); else notLiked"> favorite </ng-container>
+            <ng-template #notLiked> favorite_border </ng-template>
+          </mat-icon>
           <p>{{post.likes.length}}</p>
         </div>
         <div>

@@ -1,8 +1,8 @@
 import { PostService } from 'src/app/services/post/post.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Post } from 'src/app/model/Post';
 import { User } from 'src/app/model/User';
 import { UserService } from 'src/app/services/user/user.service';
+import { Post } from 'src/app/model/Post';
 
 @Component({
   selector: 'app-post',
@@ -21,7 +21,7 @@ export class PostComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private postService: PostService
+    private postService: PostService,
     ) {}
 
   ngOnInit(): void {
@@ -36,12 +36,19 @@ export class PostComponent implements OnInit {
   }
 
 
-  like(postId: number){
+  likeToggle(postId: number){
     this.postService.likePost(postId).subscribe(
-      data => {
+      post => {
         this.loadPosts();
       }
     )
+  }
+
+  userHasLiked(post: Post): boolean {
+    if (!post.likes) {
+      return false;
+    }
+    return post.likes.some(like => like.id === this.user?.id);
   }
 
   repost(postId: number){
