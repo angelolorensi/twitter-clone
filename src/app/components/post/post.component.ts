@@ -12,7 +12,7 @@ import { Post } from 'src/app/model/Post';
 export class PostComponent implements OnInit {
   //posts variables
   @Output() callLoadPosts = new EventEmitter<void>();
-  @Input() feedPosts?: any[];
+  @Input() feedPosts?: Post[];
   @Input() user?: User;
   isCardVisible = false;
   cardPosition: any = { top: 0, left: 0 };
@@ -28,22 +28,23 @@ export class PostComponent implements OnInit {
 
   }
 
-  //Follow logic
+  //Follows user then reloads feed
   follow(followedUser: string) {
     this.userService.follow(followedUser).subscribe((data) => {
       this.loadPosts();
     });
   }
 
-
+  //Saves user in the likes array at the liked post then reloads feed
   likeToggle(postId: number){
     this.postService.likePost(postId).subscribe(
-      post => {
+      (post:Post) => {
         this.loadPosts();
       }
     )
   }
 
+  //Return true if logged user has liked the post
   userHasLiked(post: Post): boolean {
     if (!post.likes) {
       return false;
@@ -51,12 +52,20 @@ export class PostComponent implements OnInit {
     return post.likes.some(like => like.id === this.user?.id);
   }
 
+
   repost(postId: number){
     this.postService.repost(postId).subscribe(
-      data => {
+      (post:Post) => {
         this.loadPosts();
       }
     )
+  }
+
+  userHasReposted(post: Post): boolean {
+    if (!post.reposts) {
+      return false;
+    }
+    return post.reposts.some(repost => repost.id === this.user?.id);
   }
 
   //Displays the user info card when mouse hovered over post

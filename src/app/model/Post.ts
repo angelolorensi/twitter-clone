@@ -1,3 +1,4 @@
+import { Image } from "./Image";
 import { User } from "./User";
 
 export interface Post{
@@ -7,8 +8,8 @@ export interface Post{
   postedDate: Date;
   author: User;
   likes: User[];
-  images: [];
-  reposts: [];
+  images: Image[];
+  reposts: User[];
   bookmarks: [];
   view: [];
   scheduled: boolean;

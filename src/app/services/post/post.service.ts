@@ -36,6 +36,6 @@ export class PostService {
   }
 
   public repost(postId: number){
-    return this.http.post(environment.apiAdress + '/posts/repost', {postId: postId}, {responseType: 'text'});
+    return this.http.post<Post>(environment.apiAdress + '/posts/repost', {postId: postId});
   }
 }

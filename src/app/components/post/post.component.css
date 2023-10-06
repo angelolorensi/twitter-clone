@@ -136,6 +136,35 @@
   color: #565656;
 }
 
+.post-footer-icon-repost{
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #565656;
+}
+
+.post-footer-icon-repost-reposted{
+  color:#00ba7c !important;
+}
+
+.post-footer-icon-repost:hover{
+  color:#00ba7c !important;
+}
+
+
+.post-footer-icon-like{
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #565656;
+}
+
+.post-footer-icon-like-liked{
+  color:#f91880 !important;
+}
+
+.post-footer-icon-like:hover{
+  color:#f91880 !important;
+}
+
 .post-footer-icon:hover{
   color: #1672b0;
 }

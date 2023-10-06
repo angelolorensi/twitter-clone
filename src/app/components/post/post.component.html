@@ -50,15 +50,15 @@
           <mat-icon title="Reply" class="post-footer-icon"> chat_bubble </mat-icon>
         </div>
         <div>
-          <mat-icon title="Retweet" class="post-footer-icon" (click)="repost(post.id)"> repeat </mat-icon>
-          <p>{{post.reposts.length}}</p>
+          <mat-icon title="Retweet" class="post-footer-icon-repost" [ngClass]="{'post-footer-icon-repost-reposted': userHasReposted(post)}" (click)="repost(post.id)"> repeat </mat-icon>
+          <p [ngClass]="{'post-footer-icon-repost-reposted': userHasReposted(post)}">{{post.reposts.length}}</p>
         </div>
         <div>
-          <mat-icon title="Like" class="post-footer-icon" [style.color]="userHasLiked(post) ? '#1672b0' : '#565656'" (click)="likeToggle(post.id)">
-            <ng-container  *ngIf="userHasLiked(post); else notLiked"> favorite </ng-container>
+          <mat-icon title="Like" class="post-footer-icon-like" [ngClass]="{'post-footer-icon-like-liked': userHasLiked(post)}" (click)="likeToggle(post.id)">
+            <ng-container *ngIf="userHasLiked(post); else notLiked"> favorite </ng-container>
             <ng-template #notLiked> favorite_border </ng-template>
           </mat-icon>
-          <p>{{post.likes.length}}</p>
+          <p [ngClass]="{'post-footer-icon-like-liked': userHasLiked(post)}">{{post.likes.length}}</p>
         </div>
         <div>
           <mat-icon title="Download" class="post-footer-icon"> publish </mat-icon>
