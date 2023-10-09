@@ -1,0 +1,117 @@
+<div class="post">
+  <div class="post-user">
+    <img class="post-user-avatar" *ngIf="post.author.profilePicture" [src]="post.author.profilePicture.imageUrl" alt="User Avatar" />
+    <img class="post-user-avatar" *ngIf="!post.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
+    <div class="post-user-info">
+      <p class="post-user-info-name">{{post.author.name}} <mat-icon *ngIf="post.author.verified"> verified </mat-icon></p>
+      <p class="post-user-info-username">@{{post.author.username}}</p>
+    </div>
+  </div>
+
+  <div class="post-content">
+    <p class="post-content-text">{{post.content}}</p>
+    <ng-container *ngIf="post.images.length > 0">
+      <div *ngFor="let image of post.images">
+        <img class="post-content-img" [src]="image.imageUrl"/>
+      </div>
+    </ng-container>
+    <p class="post-info">{{post.postedDate | date:'HH:mm · dd-MM-yyyy'}}</p>
+  </div>
+
+  <div class="post-btns">
+    <div class="post-footer">
+      <div>
+        <mat-icon title="Responder" class="post-footer-icon"> chat_bubble_outline </mat-icon>
+      </div>
+      <div>
+        <mat-icon title="Repostar" class="post-footer-icon-repost" [ngClass]="{'post-footer-icon-repost-reposted': userHasReposted(post)}" (click)="repost(post.id)"> repeat </mat-icon>
+        <p [ngClass]="{'post-footer-icon-repost-reposted': userHasReposted(post)}">{{post.reposts.length}}</p>
+      </div>
+      <div>
+        <mat-icon title="Curtir" class="post-footer-icon-like" [ngClass]="{'post-footer-icon-like-liked': userHasLiked(post)}" (click)="likeToggle(post.id)">
+          <ng-container *ngIf="userHasLiked(post); else notLiked"> favorite </ng-container>
+          <ng-template #notLiked> favorite_border </ng-template>
+        </mat-icon>
+        <p [ngClass]="{'post-footer-icon-like-liked': userHasLiked(post)}">{{post.likes.length}}</p>
+      </div>
+      <div>
+        <mat-icon title="Salvar Tweet" class="post-footer-icon"> bookmark_border </mat-icon>
+      </div>
+      <div>
+        <mat-icon title="Compartilhar" class="post-footer-icon"> publish </mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <p class="post-reply-replyTo">Respondendo a <a>@{{post.author.username}}</a></p>
+
+  <div class="post-reply">
+    <div class="post-replier-avatar">
+      <img class="post-user-avatar" *ngIf="user?.profilePicture" [src]="user?.profilePicture?.imageUrl" alt="User Avatar" />
+      <img class="post-user-avatar" *ngIf="!user?.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
+    </div>
+    <div class="post-reply-tweetbox">
+      <div class="post-reply-tweetbox-textarea" [formGroup]="replyForm">
+        <textarea appAutoResizeTextarea type="text" placeholder="Postar sua resposta" formControlName="reply"></textarea>
+        <img [src]="imageUrl" *ngIf="showImage">
+        <div class="post-reply-tweetbox-options">
+          <div class="post-reply-tweetbox-options-icons">
+            <mat-icon title="Image" (click)="imageInput.click()" color="primary" class="tweetBox-icons">image</mat-icon>
+            <input #imageInput type="file" accept=".jpeg, .png, .jpg" style="display: none;" (change)="handleImageSelected($event)">
+            <mat-icon (click)="gifInput.click()" color="primary" class="tweetBox-icons">gif_box</mat-icon>
+            <input title="Gif" #gifInput type="file" accept=".gif" style="display: none;" (change)="handleGifSelected($event)">
+            <mat-icon title="Emoji" color="primary" class="tweetBox-icons">mood</mat-icon>
+            <mat-icon title="Location" color="primary" class="tweetBox-icons">location_on</mat-icon>
+          </div>
+          <button class="post-reply-tweetbox-btn" (click)="submitReply()">Responder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-replies" *ngFor="let reply of replies">
+  <div class="post-replies-user">
+    <img class="post-user-avatar" *ngIf="reply.author.profilePicture" [src]="reply.author.profilePicture.imageUrl" alt="User Avatar" />
+    <img class="post-user-avatar" *ngIf="!reply.author.profilePicture" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
+    <div class="post-replies-user-info">
+      <p class="post-user-info-name">{{reply.author.name}} <mat-icon *ngIf="reply.author.verified"> verified </mat-icon></p>
+      <p class="post-user-info-username">@{{reply.author.username}}</p>
+      <p class="post-info">{{reply.postedDate | date:'HH:mm · dd-MM-yyyy'}}</p>
+    </div>
+  </div>
+
+  <div class="post-replies-content">
+    <p class="post-content-text">{{reply.content}}</p>
+    <ng-container *ngIf="reply.images.length > 0">
+      <div *ngFor="let image of reply.images">
+        <img class="post-content-img" [src]="image.imageUrl"/>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="post-replies-btns">
+    <div class="post-footer">
+      <div>
+        <mat-icon title="Responder" class="post-footer-icon"> chat_bubble_outline </mat-icon>
+      </div>
+      <div>
+        <mat-icon title="Repostar" class="post-footer-icon-repost" [ngClass]="{'post-footer-icon-repost-reposted': userHasReposted(reply)}" (click)="repost(reply.id)"> repeat </mat-icon>
+        <p [ngClass]="{'post-footer-icon-repost-reposted': userHasReposted(reply)}">{{reply.reposts.length}}</p>
+      </div>
+      <div>
+        <mat-icon title="Curtir" class="post-footer-icon-like" [ngClass]="{'post-footer-icon-like-liked': userHasLiked(reply)}" (click)="likeToggle(reply.id)">
+          <ng-container *ngIf="userHasLiked(reply); else notLiked"> favorite </ng-container>
+          <ng-template #notLiked> favorite_border </ng-template>
+        </mat-icon>
+        <p [ngClass]="{'post-footer-icon-like-liked': userHasLiked(reply)}">{{reply.likes.length}}</p>
+      </div>
+      <div>
+        <mat-icon title="Salvar Tweet" class="post-footer-icon"> bookmark_border </mat-icon>
+      </div>
+      <div>
+        <mat-icon title="Compartilhar" class="post-footer-icon"> publish </mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,252 @@
+
+.post{
+  border-right: 1px solid #424242;
+  border-left: 1px solid #424242;
+  border-bottom: 1px solid #424242;
+}
+
+.post-user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-user-avatar{
+  border-radius: 50%;
+  height: 40px;
+  margin-left: 1em;
+}
+
+.post-user-info{
+  margin-left: 1em;
+}
+
+.post-user-info-name{
+  font-size: 17px;
+  font-family: "Chirp Bold";
+  margin: 0;
+  padding: 0;
+}
+
+.post-user-info-name mat-icon{
+  font-size: 13px;
+  color: #1672b0;
+}
+
+.post-user-info-username{
+  font-size: 15px;
+  font-family: "Chirp Regular";
+  color:gray;
+  margin: 0;
+  padding: 0;
+}
+
+.post-content{
+  margin: 1.5em;
+  margin-bottom: 0.8em;
+  border-bottom: 1px solid #424242;
+}
+
+.post-content-img{
+  width: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.post-content-text{
+  font-family: "Chirp Regular";
+  font-size: 20px;
+}
+
+.post-info{
+  font-family: "Chirp Regular";
+  font-size: 15px;
+  color: gray;
+}
+
+.post-btns{
+  display: flex;
+  justify-content: center;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  border-bottom: 1px solid #424242;
+}
+
+.post-footer {
+  display: flex;
+  width: 450px;
+  justify-content: space-between;
+}
+
+.post-footer div {
+  display: flex;
+  gap: 8px;
+}
+
+.post-footer div p{
+  font-size: 18px;
+  margin-top: 2px;
+  color: #565656;
+}
+
+.post-footer-icon{
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #565656;
+}
+
+.post-footer-icon-repost{
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #565656;
+}
+
+.post-footer-icon-repost-reposted{
+  color:#00ba7c !important;
+}
+
+.post-footer-icon-repost:hover{
+  color:#00ba7c !important;
+}
+
+
+.post-footer-icon-like{
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #565656;
+}
+
+.post-footer-icon-like-liked{
+  color:#f91880 !important;
+}
+
+.post-footer-icon-like:hover{
+  color:#f91880 !important;
+}
+
+.post-footer-icon:hover{
+  color: #1672b0;
+}
+
+.post-footer-icon:active{
+  transform: scale(1.2);
+}
+
+.post-reply{
+  margin: 1em;
+  margin-top: 0.3em;
+  display: flex;
+}
+
+.post-reply-replyTo{
+  font-family: "Chirp Regular";
+  font-size: 18px;
+  color: gray;
+  margin-left: 5em;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.post-reply-replyTo a{
+  color: #1672b0;
+  cursor: pointer;
+}
+
+.post-reply-tweetbox-textarea textarea{
+  height: 80px;
+  width: 400px;
+  color: white;
+  margin-left: 20px;
+  font-size: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #000;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.post-reply-tweetbox-textarea img{
+  width: 500px;
+  margin-left: 2em;
+  margin-right: 2em;
+  object-fit: contain;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.post-reply-tweetbox-textarea textarea::placeholder{
+  font-family: "Chirp Regular";
+}
+
+.post-reply-tweetbox-options{
+  margin-left: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-reply-tweetbox-options-icons{
+  display: flex;
+  gap: 8px;
+}
+
+.post-reply-tweetbox-options-icons mat-icon{
+  cursor: pointer;
+}
+
+.post-reply-tweetbox-btn{
+  width: 30%;
+  height: 40px;
+  color: white;
+  background-color: #1672b0;
+  font-family: "chirp regular";
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  padding: 9px 41px;
+  border: 0px solid #000;
+  border-radius: 27px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.post-reply-tweetbox-btn:hover {
+  background-color: #125c8d;
+}
+
+.post-reply-tweetbox-btn:active {
+  transform: scale(0.95);
+}
+
+.post-replies{
+  border: 1px solid #424242;
+}
+
+.post-replies-content{
+  margin: 1.5em;
+  margin-bottom: 0.8em;
+  margin-top: 0.8em;
+}
+
+.post-replies-btns{
+  display: flex;
+  justify-content: center;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+
+.post-replies-user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.post-replies-user-info{
+  margin-left: 1em;
+  display: flex;
+}

@@ -13,7 +13,7 @@
     <div class="tweetbox-input" [formGroup]="tweetForm">
       <img *ngIf="user?.profilePicture?.imageUrl" [src]="user?.profilePicture?.imageUrl" alt="User Avatar" />
       <img *ngIf="!user?.profilePicture?.imageUrl" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="Default Avatar" />
-      <textarea type="text" placeholder="O que está acontecendo?" formControlName="tweetContent"></textarea>
+      <textarea appAutoResizeTextarea type="text" placeholder="O que está acontecendo?" formControlName="tweetContent"></textarea>
     </div>
     <div class="tweetBox-replyRestriction">
       <button mat-button [matMenuTriggerFor]="ReplyRestriction">

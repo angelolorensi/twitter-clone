@@ -32,6 +32,8 @@ import { TweetboxComponent } from './components/tweetbox/tweetbox.component';
 import { PostComponent } from './components/post/post.component';
 import { WidgetsComponent } from './components/widgets/widgets.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
+import { IndividualPostComponent } from './components/individual-post/individual-post.component';
+import { AutoResizeTextareaDirective } from './shared/auto-resize-textarea/auto-resize-textarea.directive';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
     PostComponent,
     WidgetsComponent,
     ConfirmationDialogComponent,
+    IndividualPostComponent,
+    AutoResizeTextareaDirective,
   ],
   imports: [
     BrowserModule,

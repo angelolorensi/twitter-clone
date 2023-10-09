@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   //Page variables
   homePage: boolean = true;
   profilePage: boolean = false;
+  individualPost: boolean = false;
 
   //User data variables
   token:string | null = '';
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
   //Posts variables
   allPosts?: Post[];
   userPosts?: Post[];
+  postId: number = 0;
 
   constructor(
     private router:Router,
@@ -51,9 +53,18 @@ export class HomeComponent implements OnInit {
     this.loadAllPosts();
   }
 
+  navigateToIndividualPost(postId: number) {
+    //this.router.navigate(['post', postId]);
+    this.postId = postId;
+    this.homePage = false;
+    this.profilePage = false;
+    this.individualPost = true;
+  }
+
   callProfilePage(){
     this.homePage = false;
     this.profilePage = true;
+    this.individualPost = false;
     this.getUserFollowing();
     this.loadProfilePosts(this.user!.id);
   }
@@ -61,6 +72,7 @@ export class HomeComponent implements OnInit {
   callHomePage(){
     this.homePage = true;
     this.profilePage = false;
+    this.individualPost = false;
   }
 
   getUserFollowing(){

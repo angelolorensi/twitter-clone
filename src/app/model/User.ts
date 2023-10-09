@@ -1,21 +1,13 @@
+import { Image } from "./Image";
+
 export interface User{
 
   id:number;
   username: string;
   bio: string;
   name: string;
-  profilePicture: {
-    imageId: number,
-    imageName:string,
-    imageType: string,
-    imageUrl: string
-  };
-  bannerPicture:  {
-    imageId: number,
-    imageName:string,
-    imageType: string,
-    imageUrl: string
-  };
+  profilePicture: Image;
+  bannerPicture: Image;
   email: string;
   phone: string;
   dateOfBirth: Date;

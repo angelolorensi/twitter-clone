@@ -12,8 +12,10 @@ import { Post } from 'src/app/model/Post';
 export class PostComponent implements OnInit {
   //posts variables
   @Output() callLoadPosts = new EventEmitter<void>();
+  @Output() selectedPost = new EventEmitter<number>;
   @Input() feedPosts?: Post[];
   @Input() user?: User;
+
   isCardVisible = false;
   cardPosition: any = { top: 0, left: 0 };
   currentHoveredPost: any;
@@ -26,6 +28,10 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  navigateToIndividualPost(postId: number){
+    this.selectedPost.emit(postId);
   }
 
   //Follows user then reloads feed
