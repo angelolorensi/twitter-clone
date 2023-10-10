@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
 
   //Page variables
   homePage: boolean = true;
+  homePageFollowing: boolean = false;
   profilePage: boolean = false;
   individualPost: boolean = false;
 
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
 
   //Posts variables
   allPosts?: Post[];
+  followedPosts?: Post[];
   userPosts?: Post[];
   postId: number = 0;
 
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
     //check if logged in
     this.loadData();
     this.loadAllPosts();
+    this.loadFollowedPosts();
   }
 
   navigateToIndividualPost(postId: number) {
@@ -104,10 +107,15 @@ export class HomeComponent implements OnInit {
     if(header == 'For You'){
       this.fyHeader = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
       this.followingHeader = '';
+      this.homePageFollowing = false;
+      this.homePage = true;
     }
     if(header == 'Following'){
       this.followingHeader = 'background-color: #252525;  border-bottom: 2px solid #1672b0';
       this.fyHeader = '';
+      this.homePageFollowing = true;
+      this.homePage = false;
+      this.loadFollowedPosts();
     }
   }
 
@@ -127,7 +135,32 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  //Loads posts into the page
+  //Loads followed users posts into the page
+  loadFollowedPosts(){
+    this.postService.getPostsFromUserFollowing().subscribe(
+      data => {
+        this.followedPosts = data.reverse();
+
+        this.followedPosts.forEach(
+          post => {
+            this.userService.getUserFollowing(post.author.username).subscribe(
+              following => {
+                post.author.followingCount = following.length;
+              }
+            )
+
+            this.userService.getUserFollowers(post.author.username).subscribe(
+              followers => {
+                post.author.followersCount = followers.length;
+              }
+            )
+          }
+        )
+      }
+    )
+  }
+
+  //Loads all posts into the page
   loadAllPosts(){
     //load all posts
     this.postService.getAllPosts().subscribe(

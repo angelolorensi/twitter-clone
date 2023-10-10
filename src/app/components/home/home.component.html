@@ -9,20 +9,20 @@
 
   <div class="feed">
     <div class="feed-header">
-      <h2 *ngIf="homePage">Página Inicial</h2>
+      <h2 *ngIf="homePage || homePageFollowing">Página Inicial</h2>
       <button *ngIf="profilePage || individualPost" (click)="callHomePage()" class="close-btn"><mat-icon color="accent">arrow_back</mat-icon></button>
       <h2 *ngIf="profilePage">{{user?.name}}</h2>
       <h2 *ngIf="individualPost">Post</h2>
     </div>
 
-    <div class="feed-subheader" *ngIf="homePage">
+    <div class="feed-subheader" *ngIf="homePage || homePageFollowing">
       <h2 [style]="fyHeader" (click)="getSelectedHeader('For You')">Para você</h2>
       <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Seguindo</h2>
     </div>
 
     <ul>
       <app-tweetbox
-        *ngIf="homePage"
+        *ngIf="homePage || homePageFollowing"
         [user]="user"
         (callLoadPosts)="loadAllPosts()">
       </app-tweetbox>
@@ -45,6 +45,14 @@
         [feedPosts]="allPosts"
         [user]="user"
         (callLoadPosts)="loadAllPosts()"
+        (selectedPost)="navigateToIndividualPost($event)">
+      </app-post>
+
+      <app-post
+        *ngIf="homePageFollowing"
+        [feedPosts]="followedPosts"
+        [user]="user"
+        (callLoadPosts)="loadFollowedPosts()"
         (selectedPost)="navigateToIndividualPost($event)">
       </app-post>
 

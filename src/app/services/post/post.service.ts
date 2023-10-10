@@ -27,6 +27,10 @@ export class PostService {
     return this.http.get<Post[]>(environment.apiAdress + '/posts/');
   }
 
+  public getPostsFromUserFollowing(){
+    return this.http.get<Post[]>(environment.apiAdress + '/posts/following');
+  }
+
   public getPostById(postId:number){
     return this.http.get<Post>(environment.apiAdress + '/posts/id/' + postId);
   }
