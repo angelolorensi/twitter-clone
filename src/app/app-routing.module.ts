@@ -6,6 +6,7 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { IndividualPostComponent } from './components/individual-post/individual-post.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LandingPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'post/:postId', component: IndividualPostComponent },

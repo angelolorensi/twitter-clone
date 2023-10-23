@@ -1,12 +1,3 @@
-body{
-  display: flex;
-  height: 100%;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 100%;
-}
-
 .feed-subheader{
   display: flex;
   justify-content: center;

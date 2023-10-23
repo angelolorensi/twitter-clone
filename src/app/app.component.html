@@ -1,11 +1,14 @@
-<body>
+<body *ngIf="!loginPage">
   <div class="sidebar">
    <app-sidebar></app-sidebar>
   </div>
   <div class="feed">
-    <router-outlet ></router-outlet>
+    <router-outlet></router-outlet>
   </div>
   <div class="widgets">
     <app-widgets ></app-widgets>
   </div>
 </body>
+<div *ngIf="loginPage">
+  <router-outlet></router-outlet>
+</div>
