@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/User';
 import { UserService } from 'src/app/services/user/user.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { Post } from 'src/app/model/Post';
+import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,20 +19,32 @@ export class ProfilePageComponent implements OnInit {
   @Input() user?: User;
   @Input() followingArray: User[] = []
   @Input() followersArray: User[] = []
+  userPosts?: Post[];
 
   //Image selection variables
   selectedImage: File | null = null;
   imageUrl: string | ArrayBuffer | null | undefined = null;
 
-  //Post variables
-  @Output() callLoadPosts = new EventEmitter<void>();
-
   constructor(
     private userService:UserService,
+    private postService:PostService,
+    private authService:AuthenticationService,
     private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.authService.userLoggedIn().subscribe(
+      data => {
+        this.user = data;
+        this.postService.getPostsByAuthor(data.id).subscribe(
+          data => {
+            this.userPosts = data;
+          }
+        )
+      }
+    )
+
+
   }
 
   handleImageSelected(event: any, type: string) {

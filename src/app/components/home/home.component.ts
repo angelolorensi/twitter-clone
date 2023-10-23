@@ -56,28 +56,6 @@ export class HomeComponent implements OnInit {
     this.loadFollowedPosts();
   }
 
-  navigateToIndividualPost(postId: number) {
-    //this.router.navigate(['post', postId]);
-    this.postId = postId;
-    this.homePage = false;
-    this.profilePage = false;
-    this.individualPost = true;
-  }
-
-  callProfilePage(){
-    this.homePage = false;
-    this.profilePage = true;
-    this.individualPost = false;
-    this.getUserFollowing();
-    this.loadProfilePosts(this.user!.id);
-  }
-
-  callHomePage(){
-    this.homePage = true;
-    this.profilePage = false;
-    this.individualPost = false;
-  }
-
   getUserFollowing(){
     this.userService.getUserFollowing(this.user?.username).subscribe(
       following => {
@@ -117,6 +95,10 @@ export class HomeComponent implements OnInit {
       this.homePage = false;
       this.loadFollowedPosts();
     }
+  }
+
+  navigateToIndividualPost(postId: number) {
+    this.router.navigate(['post', postId]);
   }
 
   //Loads user data into the page

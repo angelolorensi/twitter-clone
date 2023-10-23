@@ -9,7 +9,7 @@ import { User } from 'src/app/model/User';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() user?: User;
+  @Input() user!: User;
   @Output() callProfilePage = new EventEmitter<void>();
   @Output() callHomePage = new EventEmitter<void>();
 
@@ -19,12 +19,11 @@ export class SidebarComponent implements OnInit {
   }
 
   homeBtn(){
-    this.callHomePage.emit();
+    this.router.navigate(['home'])
   }
 
   profileBtn(){
-    this.callProfilePage.emit();
+    this.router.navigate(['/profile'])
   }
-
 
 }

@@ -7,32 +7,6 @@ body{
   min-height: 100%;
 }
 
-.sidebar{
-  flex: 0.2;
-  min-width: 250px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.feed{
-  flex: 0.5;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.feed-header{
-  display: flex;
-  align-items: center;
-  gap: 2em;
-  padding: 15px 20px;
-  border-left: 1px solid #424242;
-  border-right: 1px solid #424242;
-}
-
-.feed-header h2 {
-  font-family: "chirp bold";
-}
-
 .feed-subheader{
   display: flex;
   justify-content: center;
@@ -69,10 +43,6 @@ ul{
 ul::-webkit-scrollbar{
   width: 0;
   display: none;
-}
-
-.widgets {
-  flex: 0.3;
 }
 
 .loading-spinner{

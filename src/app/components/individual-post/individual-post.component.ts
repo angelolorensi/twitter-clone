@@ -3,6 +3,8 @@ import { Post } from 'src/app/model/Post';
 import { PostService } from 'src/app/services/post/post.service';
 import { User } from 'src/app/model/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-individual-post',
@@ -12,8 +14,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class IndividualPostComponent implements OnInit {
 
   //Initial load variables
-  @Input() postId: number = 0;
-  @Input() user?: User;
+  postId: number = 0;
+  user?: User;
   post!: Post;
   replies: Post[] = [];
 
@@ -26,11 +28,21 @@ export class IndividualPostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private renderer: Renderer2,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router:Router,
+    private authService:AuthenticationService
   ) {
+    this.route.params.subscribe(params => {
+      const postId = params['postId'];
+      this.postId = postId;
+
+      this.authService.userLoggedIn().subscribe(data => this.user = data);
+    });
+
     this.replyForm = fb.group({
       reply: ['', Validators.required]
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -103,7 +115,6 @@ export class IndividualPostComponent implements OnInit {
     return post.likes.some(like => like.id === this.post.author.id);
   }
 
-
   repost(postId: number){
     this.postService.repost(postId).subscribe(
       (post:Post) => {
@@ -159,4 +170,5 @@ export class IndividualPostComponent implements OnInit {
   scrollToTop() {
     this.renderer.setProperty(document.documentElement, 'scrollTop', 0);
   }
+
 }

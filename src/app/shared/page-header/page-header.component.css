@@ -1,0 +1,12 @@
+.post-header{
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 15px 20px;
+  border-left: 1px solid #424242;
+  border-right: 1px solid #424242;
+}
+
+.post-header h2 {
+  font-family: "chirp bold";
+}

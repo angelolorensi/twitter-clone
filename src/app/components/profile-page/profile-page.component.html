@@ -1,5 +1,5 @@
+<app-page-header [pageName]="user!.name"></app-page-header>
 <div class="profilePage">
-
   <div class="banner">
     <img class="profile-image" (click)="profileImageInput.click()" *ngIf="user?.profilePicture" src="{{user?.profilePicture?.imageUrl}}" alt="Profile Picture">
     <img class="profile-image" (click)="profileImageInput.click()" *ngIf="!user?.profilePicture" src="/assets/img/select_image_icon.png" alt="Default Profile Picture">
@@ -30,5 +30,8 @@
       </div>
     </div>
   </div>
-
 </div>
+
+<app-post
+  [feedPosts]="userPosts">
+</app-post>

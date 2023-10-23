@@ -34,6 +34,7 @@ import { WidgetsComponent } from './components/widgets/widgets.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import { IndividualPostComponent } from './components/individual-post/individual-post.component';
 import { AutoResizeTextareaDirective } from './shared/auto-resize-textarea/auto-resize-textarea.directive';
+import { PageHeaderComponent } from './shared/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AutoResizeTextareaDirective } from './shared/auto-resize-textarea/auto-
     ConfirmationDialogComponent,
     IndividualPostComponent,
     AutoResizeTextareaDirective,
+    PageHeaderComponent,
   ],
   imports: [
     BrowserModule,

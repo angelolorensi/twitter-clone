@@ -6,10 +6,10 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { IndividualPostComponent } from './components/individual-post/individual-post.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LandingPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'post/:postId', component: IndividualPostComponent },
+  { path: 'profile', component:ProfilePageComponent},
 ];
 
 @NgModule({

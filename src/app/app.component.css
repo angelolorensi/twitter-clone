@@ -1,0 +1,27 @@
+body{
+  display: flex;
+  height: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100%;
+}
+
+
+.sidebar{
+  flex: 0.2;
+  min-width: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.feed{
+  flex: 0.5;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+.widgets {
+  flex: 0.3;
+}

@@ -1,21 +1,8 @@
 <body>
-
-  <app-sidebar
-    class="sidebar"
-    [user]="user"
-    (callProfilePage)="callProfilePage()"
-    (callHomePage)="callHomePage()">
-  </app-sidebar>
-
   <div class="feed">
-    <div class="feed-header">
-      <h2 *ngIf="homePage || homePageFollowing">Página Inicial</h2>
-      <button *ngIf="profilePage || individualPost" (click)="callHomePage()" class="close-btn"><mat-icon color="accent">arrow_back</mat-icon></button>
-      <h2 *ngIf="profilePage">{{user?.name}}</h2>
-      <h2 *ngIf="individualPost">Post</h2>
-    </div>
+    <app-page-header [pageName]="'Página Inicial'" [isHome]="true"></app-page-header>
 
-    <div class="feed-subheader" *ngIf="homePage || homePageFollowing">
+    <div class="feed-subheader">
       <h2 [style]="fyHeader" (click)="getSelectedHeader('For You')">Para você</h2>
       <h2 [style]="followingHeader" (click)="getSelectedHeader('Following')">Seguindo</h2>
     </div>
@@ -26,19 +13,6 @@
         [user]="user"
         (callLoadPosts)="loadAllPosts()">
       </app-tweetbox>
-
-      <app-profile-page
-        *ngIf="profilePage"
-        [user]="user"
-        [followingArray]="followingArray"
-        [followersArray]="followersArray">
-      </app-profile-page>
-
-      <app-individual-post
-        *ngIf="individualPost"
-        [postId]="postId"
-        [user]="user">
-      </app-individual-post>
 
       <app-post
         *ngIf="homePage"
@@ -55,19 +29,6 @@
         (callLoadPosts)="loadFollowedPosts()"
         (selectedPost)="navigateToIndividualPost($event)">
       </app-post>
-
-      <app-post
-        *ngIf="profilePage"
-        [feedPosts]="userPosts"
-        [user]="user"
-        (callLoadPosts)="loadProfilePosts(user!.id)"
-        (selectedPost)="navigateToIndividualPost($event)">
-      </app-post>
     </ul>
   </div>
-
-  <div class="widgets">
-    <app-widgets></app-widgets>
-  </div>
-
 </body>

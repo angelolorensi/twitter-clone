@@ -1,4 +1,3 @@
-
 .post{
   border-right: 1px solid #424242;
   border-left: 1px solid #424242;
@@ -249,4 +248,9 @@
 .post-replies-user-info{
   margin-left: 1em;
   display: flex;
+}
+
+.loading-spinner{
+  display: flex;
+  justify-content: center;
 }
